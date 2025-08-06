@@ -7,6 +7,14 @@ import {
   MapPin,
   ChevronDown,
 } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 
 interface Event {
   id: string;
@@ -344,7 +352,7 @@ export function Calendar() {
       {/* Event Details Modal */}
       {selectedEvent && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+          className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
           onClick={() => setSelectedEvent(null)}
         >
           <div

@@ -4,21 +4,30 @@ import { MetricCard } from "./MetricCard";
 import { EventsTable } from "./EventsTable";
 import { WeeklyAgenda } from "./WeeklyAgenda";
 import { RecentMessages } from "./RecentMessages";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export function Dashboard() {
   return (
     <div className="p-8 bg-[#FDFDFD] min-h-screen">
       <div className="flex justify-between mb-4">
         <h3 className="text-lg font-semibold text-gray-900">Visão Geral</h3>
-        <select
-          className="pl-4 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:border-transparent"
-          style={{ "--tw-ring-color": "#D19F28" } as React.CSSProperties}
-        >
-          <option value="todos">Últimos 30 dias</option>
-          <option value="mes">Mês Atual</option>
-          <option value="semana">Semana</option>
-          <option value="dia">Dia</option>
-        </select>
+        <Select defaultValue="u">
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder="Filtro" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="u">Últimos 30 dias</SelectItem>
+            <SelectItem value="m">Mês Atual</SelectItem>
+            <SelectItem value="s">Semana</SelectItem>
+            <SelectItem value="d">Dia</SelectItem>
+          </SelectContent>
+        </Select>
       </div>
       {/* Metrics Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
