@@ -7,6 +7,8 @@ import AgendaDisponivel from "./screens/Agenda-disponivel";
 import Finance from "@/screens/Finance";
 import Chat from "@/screens/Chat";
 import ServicesExtra from "@/screens/ServicosExtras";
+import Notifications from "@/screens/Notifications";
+import Configuration from "@/screens/Configuration";
 import { Tabs } from "./components/TabsEvents";
 import { EventsTable } from "@/components/EventsTable";
 import { Search } from "lucide-react";
@@ -54,37 +56,15 @@ function App() {
           </div>
         );
       case "financeiro":
-        return <Finance />
+        return <Finance />;
       case "mensagens":
-        return <Chat />
+        return <Chat />;
       case "servicos":
         return <ServicesExtra />;
       case "notificacoes":
-        return (
-          <div className="p-8 bg-gray-50 min-h-screen">
-            <div className="bg-white rounded-xl p-8 shadow-sm border border-gray-100">
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">
-                Notificações
-              </h2>
-              <p className="text-gray-600">
-                Seção de notificações em desenvolvimento...
-              </p>
-            </div>
-          </div>
-        );
+        return <Notifications />;
       case "configuracoes":
-        return (
-          <div className="p-8 bg-gray-50 min-h-screen">
-            <div className="bg-white rounded-xl p-8 shadow-sm border border-gray-100">
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">
-                Configurações
-              </h2>
-              <p className="text-gray-600">
-                Seção de configurações em desenvolvimento...
-              </p>
-            </div>
-          </div>
-        );
+        return <Configuration />;
       default:
         return <Dashboard />;
     }
