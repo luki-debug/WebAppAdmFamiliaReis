@@ -4,6 +4,9 @@ import { Header } from "./components/Header";
 import { Dashboard } from "./components/Dashboard";
 import { Calendar } from "./components/Calendar";
 import AgendaDisponivel from "./screens/Agenda-disponivel";
+import Finance from "@/screens/Finance";
+import Chat from "@/screens/Chat";
+import ServicesExtra from "@/screens/ServicosExtras";
 import { Tabs } from "./components/TabsEvents";
 import { EventsTable } from "@/components/EventsTable";
 import { Search } from "lucide-react";
@@ -51,44 +54,11 @@ function App() {
           </div>
         );
       case "financeiro":
-        return (
-          <div className="p-8 bg-[#FDFDFD] min-h-screen">
-            <div className="bg-white rounded-xl p-8 shadow-sm border border-gray-100">
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">
-                Financeiro
-              </h2>
-              <p className="text-gray-600">
-                Seção financeira em desenvolvimento...
-              </p>
-            </div>
-          </div>
-        );
+        return <Finance />
       case "mensagens":
-        return (
-          <div className="p-8 bg-gray-50 min-h-screen">
-            <div className="bg-white rounded-xl p-8 shadow-sm border border-gray-100">
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">
-                Mensagens
-              </h2>
-              <p className="text-gray-600">
-                Seção de mensagens em desenvolvimento...
-              </p>
-            </div>
-          </div>
-        );
+        return <Chat />
       case "servicos":
-        return (
-          <div className="p-8 bg-gray-50 min-h-screen">
-            <div className="bg-white rounded-xl p-8 shadow-sm border border-gray-100">
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">
-                Serviços
-              </h2>
-              <p className="text-gray-600">
-                Seção de serviços em desenvolvimento...
-              </p>
-            </div>
-          </div>
-        );
+        return <ServicesExtra />;
       case "notificacoes":
         return (
           <div className="p-8 bg-gray-50 min-h-screen">
