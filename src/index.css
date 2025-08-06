@@ -49,21 +49,20 @@
   --sidebar-ring: oklch(0.708 0 0);
 }
 
-a {
+/* a {
   font-weight: 500;
-  color: #646cff;
+  color: #D19F28;
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
-}
+  color: #ad8220;
+} */
 
 body {
-  /* margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh; */
+  margin: 0;
+  /* min-width: 320px; */
+  /* max-height: calc(100vh - 32px); */
+  overflow: hidden;
 }
 
 /* h1 {

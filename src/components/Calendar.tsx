@@ -7,14 +7,6 @@ import {
   MapPin,
   ChevronDown,
 } from "lucide-react";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
 
 interface Event {
   id: string;
@@ -227,107 +219,107 @@ export function Calendar() {
 
   return (
     <div className="min-h-screen">
-      <div className="bg-white rounded-xl shadow-sm border border-gray-100">
-        {/* Header */}
-        <div className="p-6 border-b border-gray-200 relative">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-2 relative">
-                <button
-                  onClick={() => navigateMonth("prev")}
-                  className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
-                >
-                  <ChevronLeft size={20} className="text-gray-600" />
-                </button>
-                <button
-                  onClick={() => setShowDatePicker(!showDatePicker)}
-                  className="flex items-center space-x-2 px-4 py-2 hover:bg-gray-100 rounded-lg transition-colors min-w-[200px] justify-center"
-                >
-                  <span className="text-xl font-medium text-gray-800">
-                    {monthNames[currentDate.getMonth()]}{" "}
-                    {currentDate.getFullYear()}
-                  </span>
-                  <ChevronDown size={16} className="text-gray-600" />
-                </button>
-                <button
-                  onClick={() => navigateMonth("next")}
-                  className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
-                >
-                  <ChevronRight size={20} className="text-gray-600" />
-                </button>
+      <div className="pb-8 relative">
+        <div className="text-base pb-2">Selecione a data</div>
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-2 relative">
+              <button
+                onClick={() => navigateMonth("prev")}
+                className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+              >
+                <ChevronLeft size={20} className="text-gray-600" />
+              </button>
+              <button
+                onClick={() => setShowDatePicker(!showDatePicker)}
+                style={{ "--tw-ring-color": "#D19F28" } as React.CSSProperties}
+                className="relative border border-gray-300 focus:ring-2 focus:outline-none focus:border-transparent flex items-center px-4 py-2 hover:bg-gray-100 rounded-lg transition-colors min-w-[200px] justify-center"
+              >
+                <span className="text-lg font-medium text-gray-800">
+                  {monthNames[currentDate.getMonth()]}{" "}
+                  {currentDate.getFullYear()}
+                </span>
+                <ChevronDown size={16} className="absolute top-1/2 -translate-y-1/2 right-2 text-gray-600" />
+              </button>
+              <button
+                onClick={() => navigateMonth("next")}
+                className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+              >
+                <ChevronRight size={20} className="text-gray-600" />
+              </button>
 
-                {/* Date Picker Dropdown */}
-                {showDatePicker && (
-                  <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg z-50 p-4 min-w-[300px]">
-                    <div className="grid grid-cols-3 gap-2 mb-4">
-                      {monthNames.map((month, index) => (
+              {/* Date Picker Dropdown */}
+              {showDatePicker && (
+                <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg z-50 p-4 min-w-[300px]">
+                  <div className="grid grid-cols-3 gap-2 mb-4">
+                    {monthNames.map((month, index) => (
+                      <button
+                        key={month}
+                        onClick={() =>
+                          handleDateSelect(index, currentDate.getFullYear())
+                        }
+                        className={`p-2 text-sm rounded-lg transition-colors ${
+                          index === currentDate.getMonth()
+                            ? "text-white"
+                            : "text-gray-700 hover:bg-gray-100"
+                        }`}
+                        style={
+                          index === currentDate.getMonth()
+                            ? { backgroundColor: "#D19F28" }
+                            : {}
+                        }
+                      >
+                        {month.substring(0, 3)}
+                      </button>
+                    ))}
+                  </div>
+
+                  <div className="border-t border-gray-200 pt-4">
+                    <div className="grid grid-cols-3 gap-2">
+                      {generateYearOptions().map((year) => (
                         <button
-                          key={month}
+                          key={year}
                           onClick={() =>
-                            handleDateSelect(index, currentDate.getFullYear())
+                            handleDateSelect(currentDate.getMonth(), year)
                           }
                           className={`p-2 text-sm rounded-lg transition-colors ${
-                            index === currentDate.getMonth()
+                            year === currentDate.getFullYear()
                               ? "text-white"
                               : "text-gray-700 hover:bg-gray-100"
                           }`}
                           style={
-                            index === currentDate.getMonth()
+                            year === currentDate.getFullYear()
                               ? { backgroundColor: "#D19F28" }
                               : {}
                           }
                         >
-                          {month.substring(0, 3)}
+                          {year}
                         </button>
                       ))}
                     </div>
-
-                    <div className="border-t border-gray-200 pt-4">
-                      <div className="grid grid-cols-3 gap-2">
-                        {generateYearOptions().map((year) => (
-                          <button
-                            key={year}
-                            onClick={() =>
-                              handleDateSelect(currentDate.getMonth(), year)
-                            }
-                            className={`p-2 text-sm rounded-lg transition-colors ${
-                              year === currentDate.getFullYear()
-                                ? "text-white"
-                                : "text-gray-700 hover:bg-gray-100"
-                            }`}
-                            style={
-                              year === currentDate.getFullYear()
-                                ? { backgroundColor: "#D19F28" }
-                                : {}
-                            }
-                          >
-                            {year}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
                   </div>
-                )}
-              </div>
+                </div>
+              )}
             </div>
-            <button
-              className="flex items-center space-x-2 px-4 py-2 text-white rounded-lg hover:opacity-90 transition-colors"
-              style={{ backgroundColor: "#D19F28" }}
-            >
-              <Plus size={18} />
-              <span>Novo Evento</span>
-            </button>
           </div>
-
-          {/* Overlay to close date picker */}
-          {showDatePicker && (
-            <div
-              className="fixed inset-0 z-40"
-              onClick={() => setShowDatePicker(false)}
-            ></div>
-          )}
+          <button
+            className="flex items-center space-x-2 px-4 py-2 text-white rounded-lg hover:opacity-90 transition-colors"
+            style={{ backgroundColor: "#D19F28" }}
+          >
+            <Plus size={18} />
+            <span>Novo Evento</span>
+          </button>
         </div>
 
+        {/* Overlay to close date picker */}
+        {showDatePicker && (
+          <div
+            className="fixed inset-0 z-40"
+            onClick={() => setShowDatePicker(false)}
+          ></div>
+        )}
+      </div>
+      <div className="bg-white rounded-xl shadow-sm border border-gray-100">
         {/* Calendar */}
         <div className="p-6">
           {/* Week days header */}
