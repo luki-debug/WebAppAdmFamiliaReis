@@ -1,6 +1,5 @@
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Table,
   TableBody,
@@ -41,8 +40,11 @@ const AgendaDisponivel = () => {
   return (
     <div>
       {dias.map((dia) => (
-        <div className="space-y-6">
-          <Card className="bg-gray-200">
+        <div className="pb-8">
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-lg">{`${dia.nome}`}</CardTitle>
+            </CardHeader>
             <CardContent className="p-4">
               <Table className="w-full">
                 <TableHeader>
@@ -71,9 +73,7 @@ const AgendaDisponivel = () => {
                         </span>
                       </TableCell>
                       <TableCell className="text-right">
-                        <Button variant="outline" size="sm">
-                          Agendar dia
-                        </Button>
+                        <Button variant="outline">Agendar</Button>
                       </TableCell>
                     </TableRow>
                   ))}

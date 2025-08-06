@@ -5,6 +5,7 @@ import { Dashboard } from "./components/Dashboard";
 import { Calendar } from "./components/Calendar";
 import AgendaDisponivel from "./screens/Agenda-disponivel";
 import { Tabs } from "./components/TabsEvents";
+import { EventsTable } from "@/components/EventsTable";
 import { Search } from "lucide-react";
 
 function App() {
@@ -38,7 +39,7 @@ function App() {
                 },
                 {
                   label: "Próximos Eventos",
-                  content: <div>Próximos eventos</div>,
+                  content: <EventsTable />,
                 },
                 { label: "Concluídos", content: <div>Eventos concluídos</div> },
                 {
