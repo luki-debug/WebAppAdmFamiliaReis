@@ -233,7 +233,7 @@ export function Calendar() {
               <button
                 onClick={() => setShowDatePicker(!showDatePicker)}
                 style={{ "--tw-ring-color": "#D19F28" } as React.CSSProperties}
-                className="relative border border-gray-300 focus:ring-2 focus:outline-none focus:border-transparent flex items-center px-4 py-2 hover:bg-gray-100 rounded-lg transition-colors min-w-[200px] justify-center"
+                className="relative border border-gray-300 focus:ring-2 focus:outline-none focus:border-transparent flex items-center px-4 py-1 hover:bg-gray-100 rounded-lg transition-colors min-w-[200px] justify-center"
               >
                 <span className="text-lg font-medium text-gray-800">
                   {monthNames[currentDate.getMonth()]}{" "}

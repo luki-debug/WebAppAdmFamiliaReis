@@ -19,37 +19,56 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+import { Label } from "@/components/ui/label"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Checkbox } from "@/components/ui/checkbox"
+import { Calendar } from "@/components/ui/calendar"
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
+import { format } from "date-fns"
+import {
   ChevronLeft,
   ChevronRight,
   Plus,
   Clock,
   MapPin,
   ChevronDown,
+  SlidersHorizontal,
+  CalendarIcon
 } from "lucide-react";
 
 const dias = [
   {
     nome: "Sexta",
     dados: [
-      { data: "25/11/2025", hora: "11:30 - 17:30", status: "Livre" },
-      { data: "25/11/2025", hora: "18:00 - 00:00", status: "Livre" },
-      { data: "10/12/2025", hora: "18:00 - 00:00", status: "Livre" },
+      { local: "Acoty", data: "25/11/2025", hora: "11:30 - 17:30", status: "Livre" },
+      { local: "Acoty", data: "25/11/2025", hora: "18:00 - 00:00", status: "Livre" },
+      { local: "Avive", data: "10/12/2025", hora: "18:00 - 00:00", status: "Livre" },
     ],
   },
   {
     nome: "Sabado",
     dados: [
-      { data: "10/08/2025", hora: "17:30 - 23:30", status: "Livre" },
-      { data: "18/12/2025", hora: "17:30 - 23:30", status: "Livre" },
+      { local: "Avive", data: "10/08/2025", hora: "17:30 - 23:30", status: "Livre" },
+      { local: "Avive", data: "18/12/2025", hora: "17:30 - 23:30", status: "Livre" },
     ],
   },
   {
     nome: "Domingo",
     dados: [
-      { data: "10/09/2025", hora: "17:30 - 23:30", status: "Livre" },
-      { data: "10/09/2025", hora: "17:30 - 23:30", status: "Livre" },
-      { data: "10/09/2025", hora: "17:30 - 23:30", status: "Livre" },
-      { data: "10/09/2025", hora: "17:30 - 23:30", status: "Livre" },
+      { local: "Avive", data: "10/09/2025", hora: "17:30 - 23:30", status: "Livre" },
+      { local: "Avive", data: "10/09/2025", hora: "17:30 - 23:30", status: "Livre" },
+      { local: "Avive", data: "10/09/2025", hora: "17:30 - 23:30", status: "Livre" },
+      { local: "Avive", data: "10/09/2025", hora: "17:30 - 23:30", status: "Livre" },
     ],
   },
 ];
@@ -72,9 +91,19 @@ const monthNames = [
 const weekDays = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
 
 const AgendaDisponivel = () => {
+  const [local, setLocal] = useState("")
+  const [inicio, setInicio] = useState<Date>()
+  const [fim, setFim] = useState<Date>()
+  const [diasSelecionados, setDiasSelecionados] = useState<string[]>([])
   const [currentDate, setCurrentDate] = useState(new Date(2024, 11, 1)); // December 2024
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
   const [showDatePicker, setShowDatePicker] = useState(false);
+
+  const toggleDia = (dia: string) => {
+    setDiasSelecionados(prev =>
+      prev.includes(dia) ? prev.filter(d => d !== dia) : [...prev, dia]
+    )
+  }
 
   const getDaysInMonth = (date: Date) => {
     return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
@@ -118,7 +147,7 @@ const AgendaDisponivel = () => {
           <button
             onClick={() => setShowDatePicker(!showDatePicker)}
             style={{ '--tw-ring-color': '#D19F28' } as React.CSSProperties}
-            className="relative border border-gray-300 focus:ring-2 focus:outline-none focus:border-transparent flex items-center px-4 py-2 hover:bg-gray-100 rounded-lg transition-colors min-w-[200px] justify-center"
+            className="relative border border-gray-300 focus:ring-2 focus:outline-none focus:border-transparent flex items-center px-4 py-1 hover:bg-gray-100 rounded-lg transition-colors min-w-[200px] justify-center"
           >
             <span className="text-lg font-medium text-gray-800">
               {currentDate.getFullYear()}
@@ -129,7 +158,7 @@ const AgendaDisponivel = () => {
           {/* Date Picker Dropdown */}
           {showDatePicker && (
             <div className="absolute top-full transform mt-2 bg-white border border-gray-200 rounded-lg shadow-lg z-50 p-4 min-w-[300px]">
-              
+
 
               <div className="pt-4">
                 <div className="grid grid-cols-3 gap-2">
@@ -139,11 +168,10 @@ const AgendaDisponivel = () => {
                       onClick={() =>
                         handleDateSelect(currentDate.getMonth(), year)
                       }
-                      className={`p-2 text-sm rounded-lg transition-colors ${
-                        year === currentDate.getFullYear()
-                          ? "text-white"
-                          : "text-gray-700 hover:bg-gray-100"
-                      }`}
+                      className={`p-2 text-sm rounded-lg transition-colors ${year === currentDate.getFullYear()
+                        ? "text-white"
+                        : "text-gray-700 hover:bg-gray-100"
+                        }`}
                       style={
                         year === currentDate.getFullYear()
                           ? { backgroundColor: "#D19F28" }
@@ -157,6 +185,86 @@ const AgendaDisponivel = () => {
               </div>
             </div>
           )}
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              <Button onClick={() => { }} variant="outline" size="lg">
+                <div className="flex items-center justify-center gap-2.5"><SlidersHorizontal />Filtros</div>
+              </Button>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Filtros Avançados</AlertDialogTitle>
+              </AlertDialogHeader>
+              <div className="space-y-4 pt-8">
+                <div className="space-y-2">
+                  <Label className="pb-2">Local</Label>
+                  <Select onValueChange={setLocal}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Selecione um local" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="Acoty">Acoty</SelectItem>
+                      <SelectItem value="Aviva">Aviva</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                {/* Período */}
+                <div className="pt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label className="pb-2">Data Início</Label>
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <Button variant="outline" className="w-full justify-start text-left">
+                          {inicio ? format(inicio, "dd/MM/yyyy") : <span>Escolher data</span>}
+                          <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent className="p-0">
+                        <Calendar mode="single" selected={inicio} onSelect={setInicio} />
+                      </PopoverContent>
+                    </Popover>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label className="pb-2">Data Fim</Label>
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <Button variant="outline" className="w-full justify-start text-left">
+                          {fim ? format(fim, "dd/MM/yyyy") : <span>Escolher data</span>}
+                          <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent className="p-0">
+                        <Calendar mode="single" selected={fim} onSelect={setFim} />
+                      </PopoverContent>
+                    </Popover>
+                  </div>
+                </div>
+
+                {/* Dias da semana */}
+                <div className="pt-4 space-y-2">
+                  <Label className="pb-2">Dias da Semana</Label>
+                  <div className="flex flex-wrap gap-4">
+                    {["Sexta", "Sábado", "Domingo"].map((dia) => (
+                      <div className="flex items-center space-x-2" key={dia}>
+                        <Checkbox
+                          id={dia}
+                          checked={diasSelecionados.includes(dia)}
+                          onCheckedChange={() => toggleDia(dia)}
+                        />
+                        <Label htmlFor={dia}>{dia}</Label>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                <AlertDialogAction>Aplicar Filtros</AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
         </div>
       </div>
       {dias.map((dia) => (
@@ -169,6 +277,7 @@ const AgendaDisponivel = () => {
               <Table className="w-full">
                 <TableHeader>
                   <TableRow>
+                    <TableHead>Local</TableHead>
                     <TableHead>Data</TableHead>
                     <TableHead>Hora</TableHead>
                     <TableHead>Status</TableHead>
@@ -185,6 +294,7 @@ const AgendaDisponivel = () => {
                           : "bg-gray-100 hover:bg-gray-50"
                       }
                     >
+                      <TableCell className={item.local === 'Acoty' ? 'text-red-500 font-semibold' : 'text-blue-500 font-semibold'}>{item.local}</TableCell>
                       <TableCell>{item.data}</TableCell>
                       <TableCell>{item.hora}</TableCell>
                       <TableCell>
