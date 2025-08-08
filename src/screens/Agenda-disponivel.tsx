@@ -33,6 +33,9 @@ import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Calendar } from "@/components/ui/calendar"
+import { Chip } from "@/components/ui/chip";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+import { FilterChip } from "@/components/ui/chip-filter";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { format } from "date-fns"
 import {
@@ -50,25 +53,25 @@ const dias = [
   {
     nome: "Sexta",
     dados: [
-      { local: "Acoty", data: "25/11/2025", hora: "11:30 - 17:30", status: "Livre" },
-      { local: "Acoty", data: "25/11/2025", hora: "18:00 - 00:00", status: "Livre" },
-      { local: "Avive", data: "10/12/2025", hora: "18:00 - 00:00", status: "Livre" },
+      { local: "Acoty", locatario: "Sem locatário", data: "25/11/2025", hora: "11:30 - 17:30", status: "Livre" },
+      { local: "Acoty", locatario: "Sem locatário", data: "25/11/2025", hora: "18:00 - 00:00", status: "Livre" },
+      { local: "Avive", locatario: "Sem locatário", data: "10/12/2025", hora: "18:00 - 00:00", status: "Livre" },
     ],
   },
   {
     nome: "Sabado",
     dados: [
-      { local: "Avive", data: "10/08/2025", hora: "17:30 - 23:30", status: "Livre" },
-      { local: "Avive", data: "18/12/2025", hora: "17:30 - 23:30", status: "Livre" },
+      { local: "Avive", locatario: "Sem locatário", data: "10/08/2025", hora: "17:30 - 23:30", status: "Livre" },
+      { local: "Avive", locatario: "Sem locatário", data: "18/12/2025", hora: "17:30 - 23:30", status: "Livre" },
     ],
   },
   {
     nome: "Domingo",
     dados: [
-      { local: "Avive", data: "10/09/2025", hora: "17:30 - 23:30", status: "Livre" },
-      { local: "Avive", data: "10/09/2025", hora: "17:30 - 23:30", status: "Livre" },
-      { local: "Avive", data: "10/09/2025", hora: "17:30 - 23:30", status: "Livre" },
-      { local: "Avive", data: "10/09/2025", hora: "17:30 - 23:30", status: "Livre" },
+      { local: "Avive", locatario: "Sem locatário", data: "10/09/2025", hora: "17:30 - 23:30", status: "Livre" },
+      { local: "Avive", locatario: "Sem locatário", data: "10/09/2025", hora: "17:30 - 23:30", status: "Livre" },
+      { local: "Avive", locatario: "Sem locatário", data: "10/09/2025", hora: "17:30 - 23:30", status: "Livre" },
+      { local: "Avive", locatario: "Sem locatário", data: "10/09/2025", hora: "17:30 - 23:30", status: "Livre" },
     ],
   },
 ];
@@ -98,6 +101,12 @@ const AgendaDisponivel = () => {
   const [currentDate, setCurrentDate] = useState(new Date(2024, 11, 1)); // December 2024
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
   const [showDatePicker, setShowDatePicker] = useState(false);
+  const [selected, setSelected] = useState<string[]>([]);
+  const [chips, setChips] = useState(["Acoty", "Aviva", "Dias Disponíveis"]);
+
+  const handleDelete = (chipToDelete: string) => {
+    setChips((prev) => prev.filter((chip) => chip !== chipToDelete));
+  };
 
   const toggleDia = (dia: string) => {
     setDiasSelecionados(prev =>
@@ -139,10 +148,25 @@ const AgendaDisponivel = () => {
     return years;
   };
 
+  const handleChipChange = (value: boolean, label: string) => {
+    console.log(`Filtro "${label}" está ${value ? "ativado" : "desativado"}`);
+  };
+
   return (
     <div>
-      <div className="text-base pb-2">Selecione o ano</div>
+      {/* <h1 className="text-2xl font-bold text-primary">Dias disponiveis para evento</h1> */}
       <div className="flex items-center justify-between pb-8">
+        <div className="flex gap-2 flex-wrap">
+          <div className="flex gap-2">
+            {chips.map((chip) => (
+              <Chip
+                key={chip}
+                label={chip}
+                onDelete={() => handleDelete(chip)}
+              />
+            ))}
+          </div>
+        </div>
         <div className="flex items-center space-x-2 relative">
           <button
             onClick={() => setShowDatePicker(!showDatePicker)}
@@ -198,7 +222,7 @@ const AgendaDisponivel = () => {
               <div className="space-y-4 pt-8">
                 <div className="space-y-2">
                   <Label className="pb-2">Local</Label>
-                  <Select onValueChange={setLocal}>
+                  {/* <Select onValueChange={setLocal}>
                     <SelectTrigger>
                       <SelectValue placeholder="Selecione um local" />
                     </SelectTrigger>
@@ -206,11 +230,70 @@ const AgendaDisponivel = () => {
                       <SelectItem value="Acoty">Acoty</SelectItem>
                       <SelectItem value="Aviva">Aviva</SelectItem>
                     </SelectContent>
-                  </Select>
+                  </Select> */}
+                  <div className="flex gap-2 flex-wrap pb-2">
+                    <FilterChip
+                      label="Acoty"
+                      onToggle={(val) => handleChipChange(val, "Acoty")}
+                    />
+                    <FilterChip
+                      label="Avive"
+                      onToggle={(val) => handleChipChange(val, "Avive")}
+                    />
+                  </div>
+                </div>
+
+                {/* Dias da semana */}
+                <div className="pt-4 space-y-2">
+                  <Label className="pb-2">Dias da Semana</Label>
+                  <div className="flex gap-2 flex-wrap pb-2">
+                    <FilterChip
+                      label="Sexta"
+                      onToggle={(val) => handleChipChange(val, "Sexta")}
+                    />
+                    <FilterChip
+                      label="Sabado"
+                      onToggle={(val) => handleChipChange(val, "Sabado")}
+                    />
+                    <FilterChip
+                      label="Domingo"
+                      onToggle={(val) => handleChipChange(val, "Domingo")}
+                    />
+                  </div>
+                  {/* <div className="flex flex-wrap gap-4">
+                    {["Sexta", "Sábado", "Domingo"].map((dia) => (
+                      <div className="flex items-center space-x-2" key={dia}>
+                        <Checkbox
+                          id={dia}
+                          checked={diasSelecionados.includes(dia)}
+                          onCheckedChange={() => toggleDia(dia)}
+                        />
+                        <Label htmlFor={dia}>{dia}</Label>
+                      </div>
+                    ))}
+                  </div> */}
+                </div>
+
+                <div className="pt-4 space-y-2">
+                  <Label className="pb-2">Selecionar disponibilidade</Label>
+                  <RadioGroup defaultValue="option-one">
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="option-one" id="option-one" />
+                      <Label htmlFor="option-one">Disponível</Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="option-two" id="option-two" />
+                      <Label htmlFor="option-two">Alocado</Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="option-three" id="option-three" />
+                      <Label htmlFor="option-three">Todos</Label>
+                    </div>
+                  </RadioGroup>
                 </div>
 
                 {/* Período */}
-                <div className="pt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="pt-4 grid grid-cols-1 md:grid-cols-2 gap-4 pb-4">
                   <div className="space-y-2">
                     <Label className="pb-2">Data Início</Label>
                     <Popover>
@@ -242,22 +325,6 @@ const AgendaDisponivel = () => {
                   </div>
                 </div>
 
-                {/* Dias da semana */}
-                <div className="pt-4 space-y-2">
-                  <Label className="pb-2">Dias da Semana</Label>
-                  <div className="flex flex-wrap gap-4">
-                    {["Sexta", "Sábado", "Domingo"].map((dia) => (
-                      <div className="flex items-center space-x-2" key={dia}>
-                        <Checkbox
-                          id={dia}
-                          checked={diasSelecionados.includes(dia)}
-                          onCheckedChange={() => toggleDia(dia)}
-                        />
-                        <Label htmlFor={dia}>{dia}</Label>
-                      </div>
-                    ))}
-                  </div>
-                </div>
               </div>
               <AlertDialogFooter>
                 <AlertDialogCancel>Cancel</AlertDialogCancel>
@@ -278,6 +345,7 @@ const AgendaDisponivel = () => {
                 <TableHeader>
                   <TableRow>
                     <TableHead>Local</TableHead>
+                    <TableHead>Locatario</TableHead>
                     <TableHead>Data</TableHead>
                     <TableHead>Hora</TableHead>
                     <TableHead>Status</TableHead>
@@ -295,10 +363,11 @@ const AgendaDisponivel = () => {
                       }
                     >
                       <TableCell className={item.local === 'Acoty' ? 'text-red-500 font-semibold' : 'text-blue-500 font-semibold'}>{item.local}</TableCell>
+                      <TableCell>{item.locatario}</TableCell>
                       <TableCell>{item.data}</TableCell>
                       <TableCell>{item.hora}</TableCell>
                       <TableCell>
-                        <span className="bg-green-200 text-green-800 px-2 py-1 rounded-full text-xs font-medium">
+                        <span className="bg-green-200 text-green-800 px-2 py-1 rounded text-xs font-medium">
                           {item.status}
                         </span>
                       </TableCell>

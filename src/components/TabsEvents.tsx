@@ -23,7 +23,7 @@ export const Tabs: React.FC<TabsProps> = ({ tabs }) => {
               onClick={() => setActiveIndex(index)}
               className={`flex flex-col items-center justify-center border-b-[3px] pb-[13px] pt-4 ${
                 isActive
-                  ? "border-b-[#d3a826] text-[#1a170f]"
+                  ? "border-b-primary text-[#1a170f]"
                   : "border-b-transparent text-[#938353]"
               }`}
             >

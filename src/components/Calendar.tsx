@@ -7,6 +7,7 @@ import {
   MapPin,
   ChevronDown,
 } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 interface Event {
   id: string;
@@ -178,11 +179,10 @@ export function Calendar() {
           className="h-32 border border-gray-200 bg-white p-2 overflow-hidden"
         >
           <div
-            className={`text-sm font-medium mb-1 ${
-              isToday
-                ? "text-white bg-blue-500 w-6 h-6 rounded-full flex items-center justify-center"
-                : "text-gray-900"
-            }`}
+            className={`text-sm font-medium mb-1 ${isToday
+              ? "text-white bg-blue-500 w-6 h-6 rounded-full flex items-center justify-center"
+              : "text-gray-900"
+              }`}
           >
             {day}
           </div>
@@ -191,14 +191,12 @@ export function Calendar() {
               <div
                 key={event.id}
                 onClick={() => setSelectedEvent(event)}
-                className={`text-xs p-1 rounded cursor-pointer hover:opacity-80 border ${
-                  eventTypeColors[event.type]
-                } relative`}
+                className={`text-xs p-1 rounded cursor-pointer hover:opacity-80 border ${eventTypeColors[event.type]
+                  } relative`}
               >
                 <div
-                  className={`absolute left-0 top-0 bottom-0 w-1 rounded-l ${
-                    statusColors[event.status]
-                  }`}
+                  className={`absolute left-0 top-0 bottom-0 w-1 rounded-l ${statusColors[event.status]
+                    }`}
                 ></div>
                 <div className="ml-2 truncate font-medium">{event.title}</div>
                 <div className="ml-2 text-xs opacity-75">{event.time}</div>
@@ -220,95 +218,91 @@ export function Calendar() {
   return (
     <div className="min-h-screen">
       <div className="pb-8 relative">
-        <div className="text-base pb-2">Selecione a data</div>
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-4">
-            <div className="flex items-center space-x-2 relative">
-              <button
-                onClick={() => navigateMonth("prev")}
-                className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
-              >
-                <ChevronLeft size={20} className="text-gray-600" />
-              </button>
-              <button
-                onClick={() => setShowDatePicker(!showDatePicker)}
-                style={{ "--tw-ring-color": "#D19F28" } as React.CSSProperties}
-                className="relative border border-gray-300 focus:ring-2 focus:outline-none focus:border-transparent flex items-center px-4 py-1 hover:bg-gray-100 rounded-lg transition-colors min-w-[200px] justify-center"
-              >
-                <span className="text-lg font-medium text-gray-800">
-                  {monthNames[currentDate.getMonth()]}{" "}
-                  {currentDate.getFullYear()}
-                </span>
-                <ChevronDown size={16} className="absolute top-1/2 -translate-y-1/2 right-2 text-gray-600" />
-              </button>
-              <button
-                onClick={() => navigateMonth("next")}
-                className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
-              >
-                <ChevronRight size={20} className="text-gray-600" />
-              </button>
+        <div className="flex items-center justify-end">
+          {/* <h1 className="text-2xl font-bold text-primary">Sua Agenda</h1> */}
+          <div className="flex items-center gap-4">
+            <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-2 relative">
+                {/* <button
+                  onClick={() => navigateMonth("prev")}
+                  className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                >
+                  <ChevronLeft size={20} className="text-gray-600" />
+                </button> */}
+                <button
+                  onClick={() => setShowDatePicker(!showDatePicker)}
+                  style={{ "--tw-ring-color": "#D19F28" } as React.CSSProperties}
+                  className="relative border border-gray-300 focus:ring-2 focus:outline-none focus:border-transparent flex items-center px-4 py-1 hover:bg-gray-100 rounded-lg transition-colors min-w-[200px] justify-center"
+                >
+                  <span className="text-lg font-medium text-gray-800">
+                    {monthNames[currentDate.getMonth()]}{" "}
+                    {currentDate.getFullYear()}
+                  </span>
+                  <ChevronDown size={16} className="absolute top-1/2 -translate-y-1/2 right-2 text-gray-600" />
+                </button>
+                {/* <button
+                  onClick={() => navigateMonth("next")}
+                  className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                >
+                  <ChevronRight size={20} className="text-gray-600" />
+                </button> */}
 
-              {/* Date Picker Dropdown */}
-              {showDatePicker && (
-                <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg z-50 p-4 min-w-[300px]">
-                  <div className="grid grid-cols-3 gap-2 mb-4">
-                    {monthNames.map((month, index) => (
-                      <button
-                        key={month}
-                        onClick={() =>
-                          handleDateSelect(index, currentDate.getFullYear())
-                        }
-                        className={`p-2 text-sm rounded-lg transition-colors ${
-                          index === currentDate.getMonth()
+                {/* Date Picker Dropdown */}
+                {showDatePicker && (
+                  <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg z-50 p-4 min-w-[300px]">
+                    <div className="grid grid-cols-3 gap-2 mb-4">
+                      {monthNames.map((month, index) => (
+                        <button
+                          key={month}
+                          onClick={() =>
+                            handleDateSelect(index, currentDate.getFullYear())
+                          }
+                          className={`p-2 text-sm rounded-lg transition-colors ${index === currentDate.getMonth()
                             ? "text-white"
                             : "text-gray-700 hover:bg-gray-100"
-                        }`}
-                        style={
-                          index === currentDate.getMonth()
-                            ? { backgroundColor: "#D19F28" }
-                            : {}
-                        }
-                      >
-                        {month.substring(0, 3)}
-                      </button>
-                    ))}
-                  </div>
-
-                  <div className="border-t border-gray-200 pt-4">
-                    <div className="grid grid-cols-3 gap-2">
-                      {generateYearOptions().map((year) => (
-                        <button
-                          key={year}
-                          onClick={() =>
-                            handleDateSelect(currentDate.getMonth(), year)
-                          }
-                          className={`p-2 text-sm rounded-lg transition-colors ${
-                            year === currentDate.getFullYear()
-                              ? "text-white"
-                              : "text-gray-700 hover:bg-gray-100"
-                          }`}
+                            }`}
                           style={
-                            year === currentDate.getFullYear()
+                            index === currentDate.getMonth()
                               ? { backgroundColor: "#D19F28" }
                               : {}
                           }
                         >
-                          {year}
+                          {month.substring(0, 3)}
                         </button>
                       ))}
                     </div>
+
+                    <div className="border-t border-gray-200 pt-4">
+                      <div className="grid grid-cols-3 gap-2">
+                        {generateYearOptions().map((year) => (
+                          <button
+                            key={year}
+                            onClick={() =>
+                              handleDateSelect(currentDate.getMonth(), year)
+                            }
+                            className={`p-2 text-sm rounded-lg transition-colors ${year === currentDate.getFullYear()
+                              ? "text-white"
+                              : "text-gray-700 hover:bg-gray-100"
+                              }`}
+                            style={
+                              year === currentDate.getFullYear()
+                                ? { backgroundColor: "#D19F28" }
+                                : {}
+                            }
+                          >
+                            {year}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
                   </div>
-                </div>
-              )}
+                )}
+              </div>
             </div>
+           <Button onClick={() => { }} variant="default" size="lg">
+                <div className="flex items-center justify-center gap-2.5">Novo evento</div>
+              </Button>
           </div>
-          <button
-            className="flex items-center space-x-2 px-4 py-2 text-white rounded-lg hover:opacity-90 transition-colors"
-            style={{ backgroundColor: "#D19F28" }}
-          >
-            <Plus size={18} />
-            <span>Novo Evento</span>
-          </button>
         </div>
 
         {/* Overlay to close date picker */}
@@ -356,9 +350,8 @@ export function Calendar() {
                 {selectedEvent.title}
               </h3>
               <div
-                className={`w-3 h-3 rounded-full ${
-                  statusColors[selectedEvent.status]
-                }`}
+                className={`w-3 h-3 rounded-full ${statusColors[selectedEvent.status]
+                  }`}
               ></div>
             </div>
 
@@ -380,19 +373,18 @@ export function Calendar() {
               <div className="flex items-center space-x-2">
                 <span className="text-sm text-gray-600">Status:</span>
                 <span
-                  className={`px-2 py-1 rounded-full text-xs font-medium ${
-                    selectedEvent.status === "confirmed"
-                      ? "bg-green-100 text-green-800"
-                      : selectedEvent.status === "pending"
+                  className={`px-2 py-1 rounded-full text-xs font-medium ${selectedEvent.status === "confirmed"
+                    ? "bg-green-100 text-green-800"
+                    : selectedEvent.status === "pending"
                       ? "bg-yellow-100 text-yellow-800"
                       : "bg-red-100 text-red-800"
-                  }`}
+                    }`}
                 >
                   {selectedEvent.status === "confirmed"
                     ? "Confirmado"
                     : selectedEvent.status === "pending"
-                    ? "Pendente"
-                    : "Cancelado"}
+                      ? "Pendente"
+                      : "Cancelado"}
                 </span>
               </div>
             </div>
