@@ -85,10 +85,10 @@ export default function EspacoConfiguracao() {
   };
 
   return (
-    <div className="p-6 space-y-4">
-      <h1 className="text-2xl font-bold text-[#D19F28]">
+    <div className="p-8 space-y-4">
+      <h2 className="text-2xl font-bold text-primary">
         Configurações do Espaço
-      </h1>
+      </h2>
 
       <Tabs defaultValue="usuarios" className="w-full">
         <TabsList>
@@ -98,79 +98,86 @@ export default function EspacoConfiguracao() {
 
         {/* Sessão de Perfis */}
         <TabsContent value="perfis">
-          <Card>
-            <CardHeader>
-              <CardTitle>Perfis de Acesso</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <Label>Nome do Perfil</Label>
-                  <Input
-                    placeholder="Ex: Recepcionista"
-                    value={novoPerfil.nome}
-                    onChange={(e) =>
-                      setNovoPerfil({ ...novoPerfil, nome: e.target.value })
-                    }
-                  />
-                </div>
-              </div>
 
-              <div className="grid gap-4">
-                {paginas.map((pagina) => (
-                  <div key={pagina}>
-                    <Label className="font-semibold">{pagina}</Label>
-                    <Select
-                      onValueChange={(v) => handleChangePermissao(pagina, v)}
-                    >
-                      <SelectTrigger className="w-52">
-                        <SelectValue placeholder="Permissão" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="visualizar">Visualizar</SelectItem>
-                        <SelectItem value="listar">Listar</SelectItem>
-                        <SelectItem value="editar">Editar</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                ))}
-              </div>
-
-              <Button className="mt-4" onClick={adicionarPerfil}>
-                <Plus className="mr-2 h-4 w-4" /> Adicionar Perfil
-              </Button>
-            </CardContent>
-          </Card>
-
-          <Card className="mt-6">
-            <CardHeader>
-              <CardTitle>Perfis Cadastrados</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Nome</TableHead>
-                    {paginas.map((p) => (
-                      <TableHead key={p}>{p}</TableHead>
-                    ))}
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {perfis.map((perfil, idx) => (
-                    <TableRow key={idx}>
-                      <TableCell>{perfil.nome}</TableCell>
-                      {paginas.map((p) => (
-                        <TableCell key={p}>
-                          {perfil.permissoes[p] ?? "-"}
-                        </TableCell>
+          <div className="grid grid-cols-5 grid-rows-2 gap-4">
+            <div className="col-span-4 row-span-2">
+              <Card className="flex flex-1 h-100">
+                <CardHeader>
+                  <CardTitle>Perfis Cadastrados</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>Nome</TableHead>
+                        {paginas.map((p) => (
+                          <TableHead key={p}>{p}</TableHead>
+                        ))}
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {perfis.map((perfil, idx) => (
+                        <TableRow key={idx}>
+                          <TableCell>{perfil.nome}</TableCell>
+                          {paginas.map((p) => (
+                            <TableCell key={p}>
+                              {perfil.permissoes[p] ?? "-"}
+                            </TableCell>
+                          ))}
+                        </TableRow>
                       ))}
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </CardContent>
-          </Card>
+                    </TableBody>
+                  </Table>
+                </CardContent>
+              </Card>
+            </div>
+
+            <div className="col-span-1 row-span-2">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Perfis de Acesso</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <Label>Nome do Perfil</Label>
+                      <Input
+                        placeholder="Ex: Recepcionista"
+                        value={novoPerfil.nome}
+                        onChange={(e) =>
+                          setNovoPerfil({ ...novoPerfil, nome: e.target.value })
+                        }
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid gap-4">
+                    {paginas.map((pagina) => (
+                      <div key={pagina}>
+                        <Label className="font-semibold">{pagina}</Label>
+                        <Select
+                          onValueChange={(v) => handleChangePermissao(pagina, v)}
+                        >
+                          <SelectTrigger className="w-52">
+                            <SelectValue placeholder="Permissão" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="visualizar">Visualizar</SelectItem>
+                            <SelectItem value="listar">Listar</SelectItem>
+                            <SelectItem value="editar">Editar</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    ))}
+                  </div>
+
+                  <Button className="mt-4" onClick={adicionarPerfil}>
+                    Adicionar Perfil
+                  </Button>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
         </TabsContent>
 
         {/* Sessão de Usuários */}

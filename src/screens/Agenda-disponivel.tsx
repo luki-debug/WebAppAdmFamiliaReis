@@ -48,6 +48,7 @@ import {
   SlidersHorizontal,
   CalendarIcon
 } from "lucide-react";
+import { ChipRadio } from "@/components/ui/chip-radio";
 
 const dias = [
   {
@@ -93,6 +94,12 @@ const monthNames = [
 
 const weekDays = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
 
+const optionsChipRadio = [
+  { value: "0", label: "Todos" },
+  { value: "1", label: "Alocados" },
+  { value: "2", label: "Disponiveis" },
+];
+
 const AgendaDisponivel = () => {
   const [local, setLocal] = useState("")
   const [inicio, setInicio] = useState<Date>()
@@ -103,6 +110,7 @@ const AgendaDisponivel = () => {
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [selected, setSelected] = useState<string[]>([]);
   const [chips, setChips] = useState(["Acoty", "Aviva", "Dias Disponíveis"]);
+  const [typeEvent, setTypeEvent] = useState<string>("2");
 
   const handleDelete = (chipToDelete: string) => {
     setChips((prev) => prev.filter((chip) => chip !== chipToDelete));
@@ -155,25 +163,21 @@ const AgendaDisponivel = () => {
   return (
     <div>
       {/* <h1 className="text-2xl font-bold text-primary">Dias disponiveis para evento</h1> */}
-      <div className="flex items-center justify-between pb-8">
-        <div className="flex gap-2 flex-wrap">
-          <div className="flex gap-2">
-            {chips.map((chip) => (
-              <Chip
-                key={chip}
-                label={chip}
-                onDelete={() => handleDelete(chip)}
-              />
-            ))}
-          </div>
-        </div>
+      <div className="flex items-center justify-between pb-2.5 pt-5">
+        <ChipRadio
+          name="dias"
+          options={optionsChipRadio}
+          value={typeEvent}
+          onChange={(v) => setTypeEvent(v)}
+          primaryColor="#D19F28"
+        />
         <div className="flex items-center space-x-2 relative">
           <button
             onClick={() => setShowDatePicker(!showDatePicker)}
             style={{ '--tw-ring-color': '#D19F28' } as React.CSSProperties}
-            className="relative border border-gray-300 focus:ring-2 focus:outline-none focus:border-transparent flex items-center px-4 py-1 hover:bg-gray-100 rounded-lg transition-colors min-w-[200px] justify-center"
+            className="relative border border-gray-300 focus:ring-2 focus:outline-none focus:border-transparent flex items-center px-4 py-2 hover:bg-gray-100 rounded-lg transition-colors min-w-[200px] justify-center"
           >
-            <span className="text-lg font-medium text-gray-800">
+            <span className="text-sm font-medium text-gray-800">
               {currentDate.getFullYear()}
             </span>
             <ChevronDown size={16} className="absolute top-1/2 -translate-y-1/2 right-2 text-gray-600" />
@@ -211,7 +215,7 @@ const AgendaDisponivel = () => {
           )}
           <AlertDialog>
             <AlertDialogTrigger asChild>
-              <Button onClick={() => { }} variant="outline" size="lg">
+              <Button onClick={() => { }} variant="outline">
                 <div className="flex items-center justify-center gap-2.5"><SlidersHorizontal />Filtros</div>
               </Button>
             </AlertDialogTrigger>
@@ -260,36 +264,6 @@ const AgendaDisponivel = () => {
                       onToggle={(val) => handleChipChange(val, "Domingo")}
                     />
                   </div>
-                  {/* <div className="flex flex-wrap gap-4">
-                    {["Sexta", "Sábado", "Domingo"].map((dia) => (
-                      <div className="flex items-center space-x-2" key={dia}>
-                        <Checkbox
-                          id={dia}
-                          checked={diasSelecionados.includes(dia)}
-                          onCheckedChange={() => toggleDia(dia)}
-                        />
-                        <Label htmlFor={dia}>{dia}</Label>
-                      </div>
-                    ))}
-                  </div> */}
-                </div>
-
-                <div className="pt-4 space-y-2">
-                  <Label className="pb-2">Selecionar disponibilidade</Label>
-                  <RadioGroup defaultValue="option-one">
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="option-one" id="option-one" />
-                      <Label htmlFor="option-one">Disponível</Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="option-two" id="option-two" />
-                      <Label htmlFor="option-two">Alocado</Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="option-three" id="option-three" />
-                      <Label htmlFor="option-three">Todos</Label>
-                    </div>
-                  </RadioGroup>
                 </div>
 
                 {/* Período */}
@@ -332,6 +306,17 @@ const AgendaDisponivel = () => {
               </AlertDialogFooter>
             </AlertDialogContent>
           </AlertDialog>
+        </div>
+      </div>
+      <div className="flex gap-2 flex-wrap pb-8">
+        <div className="flex gap-2">
+          {chips.map((chip) => (
+            <Chip
+              key={chip}
+              label={chip}
+              onDelete={() => { }}
+            />
+          ))}
         </div>
       </div>
       {dias.map((dia) => (

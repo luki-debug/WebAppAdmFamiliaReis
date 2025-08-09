@@ -8,7 +8,10 @@ import {
   Settings,
   Bell,
   Briefcase,
+  Timer,
+  NotebookPen,
 } from "lucide-react";
+import Logo from "@/assets/logo.jpeg"
 
 interface SidebarProps {
   activeItem: string;
@@ -18,9 +21,12 @@ interface SidebarProps {
 const menuItems = [
   { id: "dashboard", label: "Dashboard", icon: Home },
   { id: "eventos", label: "Eventos", icon: Calendar },
+  { id: "agenda", label: "Agenda", icon: Calendar },
   { id: "financeiro", label: "Financeiro", icon: DollarSign },
   { id: "mensagens", label: "Mensagens", icon: MessageSquare },
   { id: "servicos", label: "Serviços", icon: Briefcase },
+  { id: "cronogramas", label: "Cronogramas de evento", icon: Timer },
+  { id: "relatorios", label: "Relatórios", icon: NotebookPen },
   { id: "notificacoes", label: "Notificações", icon: Bell },
   { id: "configuracoes", label: "Configurações", icon: Settings },
 ];
@@ -32,7 +38,7 @@ export function Sidebar({ activeItem, setActiveItem }: SidebarProps) {
         <div className="flex items-center space-x-2">
           <div>
             <img
-              src="./src/assets/logo.jpeg"
+              src={Logo}
               alt="Grupo Familia Reis"
               className="object-contain"
             />

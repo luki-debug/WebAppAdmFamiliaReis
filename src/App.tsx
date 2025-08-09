@@ -9,9 +9,10 @@ import Chat from "@/screens/Chat";
 import ServicesExtra from "@/screens/ServicosExtras";
 import Notifications from "@/screens/Notifications";
 import Configuration from "@/screens/Configuration";
-import { Tabs } from "./components/TabsEvents";
-import { EventsTable } from "@/components/EventsTable";
-import { Search } from "lucide-react";
+//import { EventsTable } from "@/components/EventsTable";
+import Eventos from '@/screens/Eventos';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "./components/ui/tabs";
+import CronogramasPage from "./screens/Cronograma";
 
 function App() {
   const [activeItem, setActiveItem] = useState("dashboard");
@@ -22,20 +23,37 @@ function App() {
         return <Dashboard />;
       case "eventos":
         return (
-          <div className="p-8 bg-[#FDFDFD] min-h-screen">
-            <Tabs
+          <Eventos />
+        );
+      case "agenda":
+        return (
+          <div className="p-8 space-y-4">
+            <h2 className="text-2xl font-bold text-primary">
+              Agenda
+            </h2>
+            <Tabs defaultValue="overview">
+              <TabsList>
+                <TabsTrigger value="overview">Visão Geral</TabsTrigger>
+                <TabsTrigger value="disponivel">Agenda dos espaços</TabsTrigger>
+                {/* <TabsTrigger value="reports">Relatórios</TabsTrigger> */}
+              </TabsList>
+              <TabsContent value="overview"><Calendar /></TabsContent>
+              <TabsContent value="disponivel"><AgendaDisponivel /></TabsContent>
+              {/* <TabsContent value="reports"><div>Seus relatórios</div></TabsContent> */}
+            </Tabs>
+            {/* <Tabs
               tabs={[
                 { label: "Agenda", content: <Calendar /> },
                 {
                   label: "Dia da semana",
                   content: <AgendaDisponivel />,
                 },
-                {
-                  label: "Próximos Eventos",
-                  content: <EventsTable />,
-                }
+                // {
+                //   label: "Próximos Eventos",
+                //   content: <EventsTable />,
+                // }
               ]}
-            />
+            /> */}
           </div>
         );
       case "financeiro":
@@ -44,6 +62,10 @@ function App() {
         return <Chat />;
       case "servicos":
         return <ServicesExtra />;
+      case "cronogramas":
+        return <CronogramasPage />;
+      case "relatorios":
+        return <div>Relatórios</div>;
       case "notificacoes":
         return <Notifications />;
       case "configuracoes":

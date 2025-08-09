@@ -218,35 +218,21 @@ export function Calendar() {
   return (
     <div className="min-h-screen">
       <div className="pb-8 relative">
-        <div className="flex items-center justify-end">
-          {/* <h1 className="text-2xl font-bold text-primary">Sua Agenda</h1> */}
+        <div className="flex items-center justify-end pt-5">
           <div className="flex items-center gap-4">
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-2 relative">
-                {/* <button
-                  onClick={() => navigateMonth("prev")}
-                  className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
-                >
-                  <ChevronLeft size={20} className="text-gray-600" />
-                </button> */}
                 <button
                   onClick={() => setShowDatePicker(!showDatePicker)}
                   style={{ "--tw-ring-color": "#D19F28" } as React.CSSProperties}
-                  className="relative border border-gray-300 focus:ring-2 focus:outline-none focus:border-transparent flex items-center px-4 py-1 hover:bg-gray-100 rounded-lg transition-colors min-w-[200px] justify-center"
+                  className="relative border border-gray-300 focus:ring-2 focus:outline-none focus:border-transparent flex items-center px-4 py-2 hover:bg-gray-100 rounded-lg transition-colors min-w-[200px] justify-center"
                 >
-                  <span className="text-lg font-medium text-gray-800">
+                  <span className="text-sm font-medium text-gray-800">
                     {monthNames[currentDate.getMonth()]}{" "}
                     {currentDate.getFullYear()}
                   </span>
                   <ChevronDown size={16} className="absolute top-1/2 -translate-y-1/2 right-2 text-gray-600" />
                 </button>
-                {/* <button
-                  onClick={() => navigateMonth("next")}
-                  className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
-                >
-                  <ChevronRight size={20} className="text-gray-600" />
-                </button> */}
-
                 {/* Date Picker Dropdown */}
                 {showDatePicker && (
                   <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg z-50 p-4 min-w-[300px]">
@@ -299,9 +285,9 @@ export function Calendar() {
                 )}
               </div>
             </div>
-           <Button onClick={() => { }} variant="default" size="lg">
-                <div className="flex items-center justify-center gap-2.5">Novo evento</div>
-              </Button>
+            <Button onClick={() => { }} variant="default">
+              <div className="flex items-center justify-center gap-2.5">Novo evento</div>
+            </Button>
           </div>
         </div>
 

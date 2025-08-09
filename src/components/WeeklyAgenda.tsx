@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from './ui/button';
 
 const agendaItems = [
   {
@@ -24,8 +25,11 @@ const agendaItems = [
 export function WeeklyAgenda() {
   return (
     <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-      <h3 className="text-lg font-semibold text-gray-900 mb-4">Agenda da Semana</h3>
-      
+      <div className='flex justify-between'>
+        <h3 className="text-lg font-semibold text-gray-900 mb-4">Agenda da Semana</h3>
+        <Button variant="ghost" className='text-primary hover:text-primary'>Ver todos</Button>
+      </div>
+
       <div className="space-y-4">
         {agendaItems.map((item, index) => (
           <div key={index} className="border-l-4 pl-4 py-2" style={{ borderLeftColor: '#D19F28' }}>

@@ -47,10 +47,10 @@ const mockNotificacoes = [
 
 export default function Notificacoes() {
   return (
-    <div className="p-6">
+    <div className="p-8">
       <div className="flex items-center space-x-2 mb-6">
-        <Bell className="text-primary" />
-        <h1 className="text-2xl font-bold text-primary">Notificações</h1>
+        {/* <Bell className="text-primary" /> */}
+        <h2 className="text-2xl font-bold text-primary">Notificações</h2>
       </div>
 
       <div className="grid gap-4">
