@@ -8,8 +8,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, BarChart, Bar, AreaChart, Area } from "recharts"
 import { DollarSign, TrendingUp, Users, Calendar, Download, Filter } from "lucide-react";
 import ReportOverview3 from "@/screens/ReportOverview3";
-import ReportOverview2 from "@/screens/ReportOverview2";
-import ReportOverview4 from "@/screens/Report3";
+import ReportExport from "@/screens/ReportExportar";
+// import ReportOverview2 from "@/screens/ReportOverview2";
+// import ReportOverview4 from "@/screens/Report3";
 
 
 const vendasMensais = [
@@ -273,10 +274,10 @@ export default function CronogramasPage() {
           <TabsTrigger value="orcamentos">Exportar Relatórios</TabsTrigger>
         </TabsList>
         <TabsContent value="overview">
-          <ReportOverview4 />
+          <ReportOverview3 />
         </TabsContent>
         <TabsContent value="orcamentos">
-          <ExportarRelatorios />
+          <ReportExport />
         </TabsContent>
       </Tabs>
     </div>

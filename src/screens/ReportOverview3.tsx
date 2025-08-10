@@ -1,166 +1,155 @@
 // src/pages/relatorios/overview.tsx
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import {
-  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
-  LineChart, Line, PieChart, Pie, Cell, Legend
-} from "recharts";
+"use client"
+
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, BarChart, Bar, AreaChart, Area } from "recharts"
+
+const vendasMensais = [
+  { mes: "Jan", vendas: 4000 },
+  { mes: "Fev", vendas: 3000 },
+  { mes: "Mar", vendas: 5000 },
+  { mes: "Abr", vendas: 4500 },
+  { mes: "Mai", vendas: 6000 },
+  { mes: "Jun", vendas: 7000 },
+]
+
+const categorias = [
+  { name: "Casamento", value: 400 },
+  { name: "Debuntante", value: 300 },
+  { name: "Corporativo", value: 234 },
+]
+const coresCategorias = ["#8884d8", "#82ca9d", "#ffc658", "#ff8042"]
+
+const topProdutos = [
+  { produto: "Plataforma 360", vendas: 240 },
+  { produto: "DJ", vendas: 221 },
+  { produto: "Bar de Drinks", vendas: 229 },
+  { produto: "Guarda-Chuvas", vendas: 200 },
+]
+
+const clientesAtivos = [
+  { mes: "Jan", eventos: 100 },
+  { mes: "Fev", eventos: 120 },
+  { mes: "Mar", eventos: 140 },
+  { mes: "Abr", eventos: 160 },
+  { mes: "Mai", eventos: 180 },
+  { mes: "Jun", eventos: 200 },
+]
 
 export default function RelatoriosOverview() {
-  // Dados de exemplo
-  const vendasPorMes = [
-    { mes: "Jan", valor: 4000 },
-    { mes: "Fev", valor: 3000 },
-    { mes: "Mar", valor: 5000 },
-    { mes: "Abr", valor: 2500 },
-    { mes: "Mai", valor: 6000 },
-  ];
-
-  const distribuicaoCategorias = [
-    { name: "Cabelo", value: 400 },
-    { name: "Unhas", value: 300 },
-    { name: "Barba", value: 200 },
-    { name: "Maquiagem", value: 150 },
-  ];
-
-  const novosClientes = [
-    { mes: "Jan", qtd: 50 },
-    { mes: "Fev", qtd: 75 },
-    { mes: "Mar", qtd: 60 },
-    { mes: "Abr", qtd: 90 },
-    { mes: "Mai", qtd: 120 },
-  ];
-
-  const receitaPorCanal = [
-    { canal: "App", valor: 5000 },
-    { canal: "Site", valor: 3500 },
-    { canal: "Presencial", valor: 2000 },
-  ];
-
-  const coresCategorias = ["#3b82f6", "#ec4899", "#22c55e", "#f59e0b"];
-
   return (
-    <div className="space-y-6 p-6">
-      {/* Cards de métricas */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div className="py-6 space-y-6">
+      {/* Métricas rápidas */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <Card>
           <CardHeader>
-            <CardTitle>Faturamento</CardTitle>
+            <CardTitle>Total de Vendas</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-2xl font-bold">R$ 15.500</p>
+            <p className="text-2xl font-bold">R$ 242.000</p>
           </CardContent>
         </Card>
-
         <Card>
           <CardHeader>
-            <CardTitle>Pedidos</CardTitle>
+            <CardTitle>Eventos Ativos</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-2xl font-bold">245</p>
+            <p className="text-2xl font-bold">200</p>
           </CardContent>
         </Card>
-
         <Card>
           <CardHeader>
-            <CardTitle>Clientes</CardTitle>
+            <CardTitle>Serviços Extras Vendidos</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-2xl font-bold">1.230</p>
+            <p className="text-2xl font-bold">R$ 1.250</p>
           </CardContent>
         </Card>
-
         <Card>
           <CardHeader>
             <CardTitle>Ticket Médio</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-2xl font-bold">R$ 63,27</p>
+            <p className="text-2xl font-bold">R$ 32.000</p>
           </CardContent>
         </Card>
       </div>
 
-      {/* Gráficos grandes */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <Card>
-          <CardHeader>
-            <CardTitle>Vendas por Mês</CardTitle>
-          </CardHeader>
-          <CardContent className="h-80">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={vendasPorMes}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="mes" />
-                <YAxis />
-                <Tooltip />
-                <Bar dataKey="valor" fill="#3b82f6" />
-              </BarChart>
-            </ResponsiveContainer>
-          </CardContent>
-        </Card>
+      {/* Gráfico de vendas por mês */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Evolução de Vendas</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <ResponsiveContainer width="100%" height={300}>
+            <LineChart data={vendasMensais}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="mes" />
+              <YAxis />
+              <Tooltip />
+              <Line type="monotone" dataKey="vendas" stroke="#8884d8" strokeWidth={2} />
+            </LineChart>
+          </ResponsiveContainer>
+        </CardContent>
+      </Card>
 
+      {/* Gráficos lado a lado */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {/* Pizza - Categorias */}
         <Card>
           <CardHeader>
-            <CardTitle>Distribuição por Categoria</CardTitle>
+            <CardTitle>Vendas por Categoria</CardTitle>
           </CardHeader>
-          <CardContent className="h-80">
-            <ResponsiveContainer width="100%" height="100%">
+          <CardContent>
+            <ResponsiveContainer width="100%" height={300}>
               <PieChart>
-                <Pie
-                  data={distribuicaoCategorias}
-                  cx="50%"
-                  cy="50%"
-                  label
-                  outerRadius={100}
-                  dataKey="value"
-                >
-                  {distribuicaoCategorias.map((entry, index) => (
+                <Pie data={categorias} cx="50%" cy="50%" outerRadius={100} fill="#8884d8" dataKey="value" label>
+                  {categorias.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={coresCategorias[index % coresCategorias.length]} />
                   ))}
                 </Pie>
                 <Tooltip />
-                <Legend />
               </PieChart>
             </ResponsiveContainer>
           </CardContent>
         </Card>
-      </div>
 
-      {/* Gráficos menores */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Barras - Produtos */}
         <Card>
           <CardHeader>
-            <CardTitle>Novos Clientes</CardTitle>
+            <CardTitle>Top Serviços Extras</CardTitle>
           </CardHeader>
-          <CardContent className="h-64">
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={novosClientes}>
+          <CardContent>
+            <ResponsiveContainer width="100%" height={300}>
+              <BarChart data={topProdutos}>
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="mes" />
+                <XAxis dataKey="produto" />
                 <YAxis />
                 <Tooltip />
-                <Line type="monotone" dataKey="qtd" stroke="#22c55e" />
-              </LineChart>
-            </ResponsiveContainer>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle>Receita por Canal</CardTitle>
-          </CardHeader>
-          <CardContent className="h-64">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={receitaPorCanal}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="canal" />
-                <YAxis />
-                <Tooltip />
-                <Bar dataKey="valor" fill="#f59e0b" />
+                <Bar dataKey="vendas" fill="#82ca9d" />
               </BarChart>
             </ResponsiveContainer>
           </CardContent>
         </Card>
       </div>
+
+      {/* Área - Clientes ativos */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Tendência de Eventos Ativos</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <ResponsiveContainer width="100%" height={300}>
+            <AreaChart data={clientesAtivos}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="mes" />
+              <YAxis />
+              <Tooltip />
+              <Area type="monotone" dataKey="eventos" stroke="#ffc658" fill="#ffc658" />
+            </AreaChart>
+          </ResponsiveContainer>
+        </CardContent>
+      </Card>
     </div>
-  );
+  )
 }
