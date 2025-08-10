@@ -8,6 +8,12 @@ import {
   ChevronDown,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "./ui/dialog";
+import { Label } from "./ui/label";
+import { Separator } from "./ui/separator";
+import { format } from "date-fns";
+import { ptBR } from "date-fns/locale";
+import { Badge } from "./ui/badge";
 
 interface Event {
   id: string;
@@ -15,8 +21,8 @@ interface Event {
   date: string;
   time: string;
   location?: string;
-  type: "wedding" | "birthday" | "corporate" | "meeting";
-  status: "confirmed" | "pending" | "cancelled";
+  type: "Casamento" | "Aniversario" | "Corporativo" | "Debutante";
+  status: "Confirmado" | "Pendente" | "Cancelado";
 }
 
 const mockEvents: Event[] = [
@@ -25,9 +31,9 @@ const mockEvents: Event[] = [
     title: "Casamento Ana & Bruno",
     date: "2024-12-25",
     time: "19:00",
-    location: "Salão Principal",
-    type: "wedding",
-    status: "confirmed",
+    location: "Acoty",
+    type: "Casamento",
+    status: "Confirmado",
   },
   {
     id: "2",
@@ -35,8 +41,8 @@ const mockEvents: Event[] = [
     date: "2024-12-10",
     time: "20:00",
     location: "Salão de Festas",
-    type: "birthday",
-    status: "pending",
+    type: "Debutante",
+    status: "Pendente",
   },
   {
     id: "3",
@@ -44,8 +50,8 @@ const mockEvents: Event[] = [
     date: "2024-12-18",
     time: "14:00",
     location: "Auditório",
-    type: "corporate",
-    status: "confirmed",
+    type: "Corporativo",
+    status: "Confirmado",
   },
   {
     id: "4",
@@ -53,24 +59,24 @@ const mockEvents: Event[] = [
     date: "2024-12-05",
     time: "18:00",
     location: "Jardim",
-    type: "wedding",
-    status: "cancelled",
+    type: "Casamento",
+    status: "Cancelado",
   },
   {
     id: "5",
-    title: "Reunião com fornecedor",
+    title: "Tech XT",
     date: "2024-12-23",
     time: "10:00",
-    type: "meeting",
-    status: "confirmed",
+    type: "Corporativo",
+    status: "Confirmado",
   },
   {
     id: "6",
-    title: "Visita Técnica - Festa Infantil",
+    title: "Lucas e Fiama",
     date: "2024-12-21",
     time: "14:00",
-    type: "meeting",
-    status: "pending",
+    type: "Casamento",
+    status: "Confirmado",
   },
 ];
 
@@ -92,22 +98,27 @@ const monthNames = [
 const weekDays = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
 
 const eventTypeColors = {
-  wedding: "bg-pink-100 text-pink-800 border-pink-200",
-  birthday: "bg-purple-100 text-purple-800 border-purple-200",
-  corporate: "bg-blue-100 text-blue-800 border-blue-200",
-  meeting: "bg-green-100 text-green-800 border-green-200",
+  Casamento: "bg-pink-100 text-pink-800 border-pink-200",
+  Debutante: "bg-purple-100 text-purple-800 border-purple-200",
+  Corporativo: "bg-blue-100 text-blue-800 border-blue-200",
+  Aniversario: "bg-green-100 text-green-800 border-green-200",
 };
 
 const statusColors = {
-  confirmed: "bg-green-500",
-  pending: "bg-yellow-500",
-  cancelled: "bg-red-500",
+  Confirmado: "bg-green-100 text-green-800",
+  Cancelado: "bg-red-100 text-red-800",
+  Pendente: "bg-yellow-100 text-yellow-800",
 };
 
 export function Calendar() {
   const [currentDate, setCurrentDate] = useState(new Date(2024, 11, 1)); // December 2024
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
   const [showDatePicker, setShowDatePicker] = useState(false);
+  const [open, setOpen] = React.useState(false);
+
+const formatDate = (date: string) => {
+  return format(new Date(date), "dd 'de' MMMM 'de' yyyy", { locale: ptBR });
+}
 
   const getDaysInMonth = (date: Date) => {
     return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
@@ -285,7 +296,7 @@ export function Calendar() {
                 )}
               </div>
             </div>
-            <Button onClick={() => { }} variant="default">
+            <Button onClick={() => { }}>
               <div className="flex items-center justify-center gap-2.5">Novo evento</div>
             </Button>
           </div>
@@ -321,75 +332,59 @@ export function Calendar() {
         </div>
       </div>
 
-      {/* Event Details Modal */}
-      {selectedEvent && (
-        <div
-          className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
-          onClick={() => setSelectedEvent(null)}
-        >
-          <div
-            className="bg-white rounded-xl p-6 max-w-md w-full mx-4"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="flex items-start justify-between mb-4">
-              <h3 className="text-lg font-semibold text-gray-900">
-                {selectedEvent.title}
-              </h3>
-              <div
-                className={`w-3 h-3 rounded-full ${statusColors[selectedEvent.status]
-                  }`}
-              ></div>
-            </div>
-
-            <div className="space-y-3">
-              <div className="flex items-center space-x-3 text-gray-600">
-                <Clock size={16} />
-                <span>
-                  {selectedEvent.date} às {selectedEvent.time}
-                </span>
-              </div>
-
-              {selectedEvent.location && (
-                <div className="flex items-center space-x-3 text-gray-600">
-                  <MapPin size={16} />
-                  <span>{selectedEvent.location}</span>
+      <Dialog open={selectedEvent ? true : false} onOpenChange={() => setSelectedEvent(null)}>
+        <DialogTrigger asChild>
+        </DialogTrigger>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Detalhes da agenda{selectedEvent?.title}</DialogTitle>
+          </DialogHeader>
+          <div>
+            <Separator />
+              <div className="py-8">
+                {/* Seção: Informações Gerais */}
+                <div className="pb-3">
+                  <div className="flex justify-between items-center">
+                    <h3 className="font-semibold text-lg">{selectedEvent?.type}</h3>
+                    <Badge
+                      className={`rounded ${selectedEvent && statusColors[selectedEvent.status]}`}
+                    >
+                      {selectedEvent?.status}
+                    </Badge>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <p className="text-sm text-muted-foreground">
+                      Local: <span className="font-medium text-foreground">{selectedEvent?.location}</span>
+                    </p>
+                    <Button variant="ghost" className='text-primary hover:text-primary'>Ir para o evento</Button>
+                  </div>
+                  <p className="text-sm text-muted-foreground">
+                    Locatário:{" "}
+                    <span className="font-medium text-foreground">{selectedEvent?.title}</span>
+                  </p>
                 </div>
-              )}
 
-              <div className="flex items-center space-x-2">
-                <span className="text-sm text-gray-600">Status:</span>
-                <span
-                  className={`px-2 py-1 rounded-full text-xs font-medium ${selectedEvent.status === "confirmed"
-                    ? "bg-green-100 text-green-800"
-                    : selectedEvent.status === "pending"
-                      ? "bg-yellow-100 text-yellow-800"
-                      : "bg-red-100 text-red-800"
-                    }`}
-                >
-                  {selectedEvent.status === "confirmed"
-                    ? "Confirmado"
-                    : selectedEvent.status === "pending"
-                      ? "Pendente"
-                      : "Cancelado"}
-                </span>
+                {/* Seção: Datas */}
+                <div className="grid grid-cols-2 gap-4 pt-8">
+                  <div>
+                    <p className="text-xs text-muted-foreground">Data do Evento</p>
+                    <p className="text-base">{selectedEvent && formatDate(selectedEvent.date)}</p>
+                    <p className="text-xs text-muted-foreground">Horário: {selectedEvent?.time}</p>
+                  </div>
+                </div>
               </div>
-            </div>
-
-            <div className="flex space-x-3 mt-6">
-              <button className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
-                Editar
-              </button>
-              <button
-                onClick={() => setSelectedEvent(null)}
-                className="flex-1 px-4 py-2 text-white rounded-lg hover:opacity-90 transition-colors"
-                style={{ backgroundColor: "#D19F28" }}
-              >
-                Fechar
-              </button>
-            </div>
+            <Separator />
           </div>
-        </div>
-      )}
+          <DialogFooter>
+            <DialogClose asChild>
+              <Button variant="outline">Cancel</Button>
+            </DialogClose>
+            <DialogClose asChild>
+              <Button type="submit">Save changes</Button>
+            </DialogClose>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

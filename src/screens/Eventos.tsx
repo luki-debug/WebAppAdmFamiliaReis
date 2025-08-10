@@ -28,6 +28,8 @@ type Eventos = {
     status: string;
     pacote: string;
     servicosExtra: string[];
+    cronograma: string;
+    tarefasExtras: string[];
 };
 
 const locais = ["Acoty", "Avive"];
@@ -37,6 +39,8 @@ const locatarios = ["Lucas e Fiama", "Caroline e João", "Empresa XPTO", "Ana Cl
 const status = ["Em andamento", "Cancelado", "Concluido", "Atrasado"];
 const pacotes = ["Cardapio Prata", "Cardapio Ouro", "Cardapio Platina"];
 const servicos = [["Bar de Drinks", "Pista Paris"], ["Bar de Drinks", "Plataforma 360", "Guarda Chuves decorados", "Love"], ["Arco de Flores"]];
+const tarefasExtras = [["Escolher maquiador"],["Escolher vestido", "Contratar Bar"], [""]];
+
 const statusColor: Record<string, string> = {
     "Concluido": "bg-green-100 text-green-800",
     "Atrasado": "bg-red-100 text-red-800",
@@ -58,6 +62,8 @@ function gerarMock(qtd: number): Eventos[] {
             status: status[Math.floor(Math.random() * status.length)],
             pacote: pacotes[Math.floor(Math.random() * pacotes.length)],
             servicosExtra: servicos[Math.floor(Math.random() * servicos.length)],
+            cronograma: 'Casamento',
+            tarefasExtras: tarefasExtras[Math.floor(Math.random() * tarefasExtras.length)],
         });
     }
 
@@ -309,7 +315,7 @@ const Overview = () => {
                         {itemSelecionado ? (
                             <div className="py-8">
                                 {/* Seção: Informações Gerais */}
-                                <div className="space-y-3">
+                                <div className="space-y-2.5">
                                     <div className="flex justify-between items-center">
                                         <h3 className="font-semibold text-lg">{itemSelecionado.tipo}</h3>
                                         <Badge
@@ -318,7 +324,7 @@ const Overview = () => {
                                             {itemSelecionado.status}
                                         </Badge>
                                     </div>
-                                    <div className="flex justify-between">
+                                    <div className="flex justify-between items-center">
                                         <p className="text-sm text-muted-foreground">
                                             Local: <span className="font-medium text-foreground">{itemSelecionado.local}</span>
                                         </p>
@@ -332,9 +338,19 @@ const Overview = () => {
                                         Pacote: {" "}
                                         <span className="font-medium text-foreground">{itemSelecionado.pacote}</span>
                                     </p>
-                                    <p className="text-sm text-muted-foreground pb-2">
+                                    <p className="text-sm text-muted-foreground">
                                         Serviços: {" "}
                                         {itemSelecionado.servicosExtra.map((item, index) => (
+                                            <p className="text-sm text-muted-foreground">{item}</p>
+                                        ))}
+                                    </p>
+                                     <p className="text-sm text-muted-foreground">
+                                        Cronograma: {" "}
+                                        <span className="font-medium text-foreground">{itemSelecionado.cronograma}</span>
+                                    </p>
+                                    <p className="text-sm text-muted-foreground">
+                                        Tarefas extras: {" "}
+                                        {itemSelecionado.tarefasExtras.map((item, index) => (
                                             <p className="text-sm text-muted-foreground">{item}</p>
                                         ))}
                                     </p>

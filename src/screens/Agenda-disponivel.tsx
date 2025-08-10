@@ -54,25 +54,25 @@ const dias = [
   {
     nome: "Sexta",
     dados: [
-      { local: "Acoty", locatario: "Sem locatário", data: "25/11/2025", hora: "11:30 - 17:30", status: "Livre" },
-      { local: "Acoty", locatario: "Sem locatário", data: "25/11/2025", hora: "18:00 - 00:00", status: "Livre" },
-      { local: "Avive", locatario: "Sem locatário", data: "10/12/2025", hora: "18:00 - 00:00", status: "Livre" },
+      { local: "Acoty", locatario: "Sem locatário", data: "25 de Nov 2024", hora: "11:30 - 17:30", status: "Livre" },
+      { local: "Acoty", locatario: "Sem locatário", data: "25 de Nov 2024", hora: "18:00 - 00:00", status: "Livre" },
+      { local: "Avive", locatario: "Sem locatário", data: "25 de Nov 2024", hora: "18:00 - 00:00", status: "Livre" },
     ],
   },
   {
     nome: "Sabado",
     dados: [
-      { local: "Avive", locatario: "Sem locatário", data: "10/08/2025", hora: "17:30 - 23:30", status: "Livre" },
-      { local: "Avive", locatario: "Sem locatário", data: "18/12/2025", hora: "17:30 - 23:30", status: "Livre" },
+      { local: "Avive", locatario: "Sem locatário", data: "10 de Ago 2024", hora: "17:30 - 23:30", status: "Livre" },
+      { local: "Avive", locatario: "Sem locatário", data: "18 de Dez 2024", hora: "17:30 - 23:30", status: "Livre" },
     ],
   },
   {
     nome: "Domingo",
     dados: [
-      { local: "Avive", locatario: "Sem locatário", data: "10/09/2025", hora: "17:30 - 23:30", status: "Livre" },
-      { local: "Avive", locatario: "Sem locatário", data: "10/09/2025", hora: "17:30 - 23:30", status: "Livre" },
-      { local: "Avive", locatario: "Sem locatário", data: "10/09/2025", hora: "17:30 - 23:30", status: "Livre" },
-      { local: "Avive", locatario: "Sem locatário", data: "10/09/2025", hora: "17:30 - 23:30", status: "Livre" },
+      { local: "Avive", locatario: "Sem locatário", data: "10 de Out 2024", hora: "17:30 - 23:30", status: "Livre" },
+      { local: "Avive", locatario: "Sem locatário", data: "10 de Out 2024", hora: "17:30 - 23:30", status: "Livre" },
+      { local: "Avive", locatario: "Sem locatário", data: "10 de Out 2024", hora: "17:30 - 23:30", status: "Livre" },
+      { local: "Avive", locatario: "Sem locatário", data: "10 de Out 2024", hora: "17:30 - 23:30", status: "Livre" },
     ],
   },
 ];

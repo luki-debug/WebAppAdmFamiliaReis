@@ -302,7 +302,7 @@ export default function Financeiro() {
     };
 
     return (
-      <div className="pt-8">
+      <div className="pt-2">
 
         <div className="flex justify-end pb-8">
           <Button onClick={() => { }} variant="outline">
@@ -394,7 +394,7 @@ export default function Financeiro() {
               {itemSelecionado ? (
                 <div className="py-8">
                   {/* Seção: Informações Gerais */}
-                  <div className="space-y-3">
+                  <div className="pb-3">
                     <div className="flex justify-between items-center">
                       <h3 className="font-semibold text-lg">{itemSelecionado.tipo}</h3>
                       <Badge
@@ -403,7 +403,7 @@ export default function Financeiro() {
                         {itemSelecionado.status}
                       </Badge>
                     </div>
-                    <div className="flex justify-between">
+                    <div className="flex justify-between items-center">
                       <p className="text-sm text-muted-foreground">
                         Local: <span className="font-medium text-foreground">{itemSelecionado.local}</span>
                       </p>
