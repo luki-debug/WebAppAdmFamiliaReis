@@ -13,6 +13,7 @@ import Configuration from "@/screens/Configuration";
 import Eventos from '@/screens/Eventos';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./components/ui/tabs";
 import CronogramasPage from "./screens/Cronograma";
+import Relatorios from "@/screens/Reports";
 
 function App() {
   const [activeItem, setActiveItem] = useState("dashboard");
@@ -65,7 +66,7 @@ function App() {
       case "cronogramas":
         return <CronogramasPage />;
       case "relatorios":
-        return <div>Relatórios</div>;
+        return <Relatorios />;
       case "notificacoes":
         return <Notifications />;
       case "configuracoes":

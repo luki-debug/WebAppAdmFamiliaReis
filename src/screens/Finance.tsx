@@ -178,9 +178,6 @@ export default function Financeiro() {
     return (
       <div className="space-y-6 pt-2">
         <div className="flex justify-end items-center">
-          {/* <h2 className="text-2xl font-bold text-primary">
-            Financeiro
-          </h2> */}
           <Select defaultValue={filtro} onValueChange={setFiltro}>
             <SelectTrigger className="w-[180px]">
               <SelectValue />

@@ -94,7 +94,6 @@ const Tarefas = () => {
             </DialogFooter>
           </DialogContent>
         </Dialog>
-
       </div>
 
       <Table className="w-full">
