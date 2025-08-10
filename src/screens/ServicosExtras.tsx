@@ -85,7 +85,7 @@ export default function ServicosExtras() {
     { value: "0", label: "Casamento" },
     { value: "1", label: "Debutante" },
     { value: "2", label: "Empresarial" },
-    { value: 3, label: "Todos" }
+    { value: "3", label: "Todos" }
   ];
 
   const adicionarServico = () => {
