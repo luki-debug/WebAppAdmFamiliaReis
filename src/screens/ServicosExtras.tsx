@@ -13,13 +13,13 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog"
 import { ChipRadio } from "@/components/ui/chip-radio";
-import barImage from "@/assets/bar.jpg";
-import GuardaChuvasImage from "@/assets/guarda-chuvas.jpeg";
-import DJImage from "@/assets/dj.jpg";
-import ParisImage from "@/assets/paris.jpg";
-import BuffetImage from "@/assets/buffet.jpg";
-import DecoracaoImage from "@/assets/Decoracao.jpg";
-import Plataforma360Image from "@/assets/360.png";
+import BarImage from "@/assets/bar-min.jpg";
+import GuardaChuvasImage from "@/assets/guarda-chuvas-min.jpeg";
+import DJImage from "@/assets/dj-min.jpg";
+import ParisImage from "@/assets/paris-min.jpg";
+import BuffetImage from "@/assets/buffet-min.jpg";
+import DecoracaoImage from "@/assets/Decoracao-min.jpg";
+import Plataforma360Image from "@/assets/360-min.png";
 import { Label } from "@/components/ui/label"
 
 type Servico = {
@@ -40,12 +40,12 @@ type Pacote = {
 }
 
 const mockServicos: Servico[] = [
-  { id: 1, codigo: "BAR01", nome: "Bar de Drinks", descricao: "Barman e coquetéis", preco: "R$ 2.000,00", imagem: barImage },
-  { id: 2, codigo: "DEC01", nome: "Decoração com Guarda-Chuvas", descricao: "Temática suspensa", preco: "R$ 1.200,00", imagem: GuardaChuvasImage },
-  { id: 3, codigo: "DJ01", nome: "DJ", descricao: "DJ com som e luz", preco: "R$ 3.500,00", imagem: DJImage },
-  { id: 4, codigo: "PIS01", nome: "Pista Paris", descricao: "Pista iluminada estilo Paris", preco: "R$ 2.800,00", imagem: ParisImage },
-  { id: 5, codigo: "BUF01", nome: "Buffet Completo", descricao: "Entradas, jantar e sobremesas", preco: "R$ 5.000,00", imagem: BuffetImage },
-  { id: 6, codigo: "DEC02", nome: "Decoração da Cerimônia", descricao: "Flores, tapete e altar", preco: "R$ 1.800,00", imagem: DecoracaoImage },
+  { id: 1, codigo: "BAR01", nome: "Bar de Drinks", descricao: "Barman e coquetéis", preco: "R$ 2.000,00", imagem: BarImage},
+  { id: 2, codigo: "DEC01", nome: "Decoração com Guarda-Chuvas", descricao: "Temática suspensa", preco: "R$ 1.200,00", imagem: GuardaChuvasImage},
+  { id: 3, codigo: "DJ01", nome: "DJ", descricao: "DJ com som e luz", preco: "R$ 3.500,00", imagem: DJImage},
+  { id: 4, codigo: "PIS01", nome: "Pista Paris", descricao: "Pista iluminada estilo Paris", preco: "R$ 2.800,00", imagem: ParisImage},
+  { id: 5, codigo: "BUF01", nome: "Buffet Completo", descricao: "Entradas, jantar e sobremesas", preco: "R$ 5.000,00", imagem: BuffetImage},
+  { id: 6, codigo: "DEC02", nome: "Decoração da Cerimônia", descricao: "Flores, tapete e altar", preco: "R$ 1.800,00", imagem: DecoracaoImage},
   { id: 7, codigo: "PLA01", nome: "Plataforma 360", descricao: "Vídeo 360 para convidados", preco: "R$ 2.200,00", imagem: Plataforma360Image },
 ]
 
