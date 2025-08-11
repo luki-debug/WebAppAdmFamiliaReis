@@ -1,4 +1,3 @@
-import React, { KeyboardEvent } from "react";
 
 type Option = {
   value: string;
@@ -27,7 +26,7 @@ export function ChipRadio({
   primaryColor = "#D19F28",
 }: ChipRadioProps) {
   // keyboard navigation: left/right arrows
-  const onKeyDown = (e: KeyboardEvent, idx: number) => {
+  const onKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>, idx: number) => {
     if (!["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(e.key))
       return;
 
@@ -57,7 +56,7 @@ export function ChipRadio({
             role="radio"
             aria-checked={selected}
             tabIndex={selected ? 0 : -1}
-            onKeyDown={(e) => onKeyDown(e, idx)}
+            onKeyDown={(e: React.KeyboardEvent<HTMLButtonElement>) => onKeyDown(e, idx)}
             onClick={() => onChange?.(opt.value)}
             type="button"
             className={cn(

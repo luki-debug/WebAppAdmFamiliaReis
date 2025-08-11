@@ -12,9 +12,7 @@ import {
   DialogTitle,
   DialogFooter,
 } from "@/components/ui/dialog"
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select"
 import { ChipRadio } from "@/components/ui/chip-radio";
-import { Plus } from "lucide-react";
 import barImage from "@/assets/bar.jpg";
 import GuardaChuvasImage from "@/assets/guarda-chuvas.jpeg";
 import DJImage from "@/assets/dj.jpg";
@@ -105,6 +103,8 @@ export default function ServicosExtras() {
     setImagem("")
     setCodigo("")
     setOpen(false)
+
+    setFiltro("");
   }
 
   const servicosFiltrados = filtro

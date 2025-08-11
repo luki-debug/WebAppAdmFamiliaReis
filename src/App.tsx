@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Sidebar } from "./components/Sidebar";
 import { Header } from "./components/Header";
 import { Dashboard } from "./components/Dashboard";
@@ -81,7 +81,7 @@ function App() {
       <Sidebar activeItem={activeItem} setActiveItem={setActiveItem} />
 
       <div className="flex-1 flex flex-col overflow-hidden">
-        <Header title={activeItem === "agenda" ? "Agenda" : "Dashboard"} />
+        <Header />
         <main className="flex-1 overflow-y-auto">{renderContent()}</main>
       </div>
     </div>

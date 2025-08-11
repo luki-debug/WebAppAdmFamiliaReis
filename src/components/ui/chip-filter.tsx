@@ -1,6 +1,6 @@
 import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
-import React, { useState } from "react";
+import { useState } from "react";
 
 interface FilterChipProps {
   label: string;

@@ -6,7 +6,17 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge"
 import { motion } from "framer-motion";
-import { Bell, CheckCheck, Send } from 'lucide-react';
+import { CheckCheck, Send } from 'lucide-react';
+
+interface Message {
+  from: 'client' | 'admin';
+  text: string;
+  hour: string;
+}
+
+type MockMessages = {
+  [key: string]: Message[];
+};
 
 const mockClients = [
   { id: 1, name: "João Silva", message: 'Olá, gostaria de confirmar o horário.', time: '10:45', avatar: "JS", status: 1, count: 1 },
@@ -14,7 +24,7 @@ const mockClients = [
   { id: 3, name: "Carlos Pereira", message: "Quais formas de pagamento aceitam?", time: '2 dias atrás', avatar: "CP", status: 0, count: 1 },
 ];
 
-const mockMessages = {
+const mockMessages: MockMessages = {
   1: [
     { from: "client", text: "Olá, gostaria de confirmar o horário.", hour: "Hoje 10:45" },
     { from: "admin", text: "Claro, está confirmado para 15h.", hour: "Hoje 10:50" },
@@ -24,7 +34,7 @@ const mockMessages = {
 };
 
 export default function ChatPage() {
-  const [selectedClientId, setSelectedClientId] = useState<number | null>(1);
+  const [selectedClientId, setSelectedClientId] = useState(1);
   const [messages, setMessages] = useState(mockMessages);
   const [newMessage, setNewMessage] = useState("");
 

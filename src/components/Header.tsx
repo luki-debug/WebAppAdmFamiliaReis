@@ -3,11 +3,11 @@ import { Search, User, Bell, MessageCircle } from 'lucide-react';
 import { Button } from './ui/button';
 import { Badge } from "@/components/ui/badge"
 
-interface HeaderProps {
-  title?: string;
-}
+// interface HeaderProps {
+//   title?: string;
+// }
 
-export function Header({ title = "Dashboard" }: HeaderProps) {
+export function Header() {
   return (
     <div className="bg-white border-b border-gray-200 px-8 py-4">
       <div className="flex items-center justify-between">

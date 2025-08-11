@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { useState } from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
@@ -23,27 +23,18 @@ import {
   AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
-  AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 import { Label } from "@/components/ui/label"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Checkbox } from "@/components/ui/checkbox"
 import { Calendar } from "@/components/ui/calendar"
 import { Chip } from "@/components/ui/chip";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { FilterChip } from "@/components/ui/chip-filter";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { format } from "date-fns"
 import {
-  ChevronLeft,
-  ChevronRight,
-  Plus,
-  Clock,
-  MapPin,
   ChevronDown,
   SlidersHorizontal,
   CalendarIcon
@@ -77,23 +68,6 @@ const dias = [
   },
 ];
 
-const monthNames = [
-  "Janeiro",
-  "Fevereiro",
-  "Março",
-  "Abril",
-  "Maio",
-  "Junho",
-  "Julho",
-  "Agosto",
-  "Setembro",
-  "Outubro",
-  "Novembro",
-  "Dezembro",
-];
-
-const weekDays = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
-
 const optionsChipRadio = [
   { value: "0", label: "Todos" },
   { value: "1", label: "Alocados" },
@@ -101,46 +75,12 @@ const optionsChipRadio = [
 ];
 
 const AgendaDisponivel = () => {
-  const [local, setLocal] = useState("")
   const [inicio, setInicio] = useState<Date>()
   const [fim, setFim] = useState<Date>()
-  const [diasSelecionados, setDiasSelecionados] = useState<string[]>([])
   const [currentDate, setCurrentDate] = useState(new Date(2024, 11, 1)); // December 2024
-  const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
   const [showDatePicker, setShowDatePicker] = useState(false);
-  const [selected, setSelected] = useState<string[]>([]);
-  const [chips, setChips] = useState(["Acoty", "Aviva", "Dias Disponíveis"]);
+  const [chips, ] = useState(["Acoty", "Aviva", "Dias Disponíveis"]);
   const [typeEvent, setTypeEvent] = useState<string>("2");
-
-  const handleDelete = (chipToDelete: string) => {
-    setChips((prev) => prev.filter((chip) => chip !== chipToDelete));
-  };
-
-  const toggleDia = (dia: string) => {
-    setDiasSelecionados(prev =>
-      prev.includes(dia) ? prev.filter(d => d !== dia) : [...prev, dia]
-    )
-  }
-
-  const getDaysInMonth = (date: Date) => {
-    return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
-  };
-
-  const getFirstDayOfMonth = (date: Date) => {
-    return new Date(date.getFullYear(), date.getMonth(), 1).getDay();
-  };
-
-  const navigateMonth = (direction: "prev" | "next") => {
-    setCurrentDate((prev) => {
-      const newDate = new Date(prev);
-      if (direction === "prev") {
-        newDate.setMonth(prev.getMonth() - 1);
-      } else {
-        newDate.setMonth(prev.getMonth() + 1);
-      }
-      return newDate;
-    });
-  };
 
   const handleDateSelect = (month: number, year: number) => {
     setCurrentDate(new Date(year, month, 1));
@@ -226,15 +166,6 @@ const AgendaDisponivel = () => {
               <div className="space-y-4 pt-8">
                 <div className="space-y-2">
                   <Label className="pb-2">Local</Label>
-                  {/* <Select onValueChange={setLocal}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Selecione um local" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="Acoty">Acoty</SelectItem>
-                      <SelectItem value="Aviva">Aviva</SelectItem>
-                    </SelectContent>
-                  </Select> */}
                   <div className="flex gap-2 flex-wrap pb-2">
                     <FilterChip
                       label="Acoty"

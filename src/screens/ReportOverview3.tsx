@@ -104,7 +104,7 @@ export default function RelatoriosOverview() {
             <ResponsiveContainer width="100%" height={300}>
               <PieChart>
                 <Pie data={categorias} cx="50%" cy="50%" outerRadius={100} fill="#8884d8" dataKey="value" label>
-                  {categorias.map((entry, index) => (
+                  {categorias.map((_, index) => (
                     <Cell key={`cell-${index}`} fill={coresCategorias[index % coresCategorias.length]} />
                   ))}
                 </Pie>

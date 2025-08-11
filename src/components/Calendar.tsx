@@ -1,15 +1,9 @@
 import React, { useState } from "react";
 import {
-  ChevronLeft,
-  ChevronRight,
-  Plus,
-  Clock,
-  MapPin,
   ChevronDown,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "./ui/dialog";
-import { Label } from "./ui/label";
 import { Separator } from "./ui/separator";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
@@ -114,7 +108,6 @@ export function Calendar() {
   const [currentDate, setCurrentDate] = useState(new Date(2024, 11, 1)); // December 2024
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
   const [showDatePicker, setShowDatePicker] = useState(false);
-  const [open, setOpen] = React.useState(false);
 
 const formatDate = (date: string) => {
   return format(new Date(date), "dd 'de' MMMM 'de' yyyy", { locale: ptBR });
@@ -133,18 +126,6 @@ const formatDate = (date: string) => {
       currentDate.getMonth() + 1
     ).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
     return mockEvents.filter((event) => event.date === dateStr);
-  };
-
-  const navigateMonth = (direction: "prev" | "next") => {
-    setCurrentDate((prev) => {
-      const newDate = new Date(prev);
-      if (direction === "prev") {
-        newDate.setMonth(prev.getMonth() - 1);
-      } else {
-        newDate.setMonth(prev.getMonth() + 1);
-      }
-      return newDate;
-    });
   };
 
   const handleDateSelect = (month: number, year: number) => {

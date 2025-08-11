@@ -35,7 +35,6 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -195,7 +194,7 @@ export default function Financeiro() {
             { title: "Receita Total", valor: "R$ 45.000,00" },
             { title: "A Receber", valor: "R$ 12.300,00" },
             { title: "Pagamentos Futuros", valor: "R$ 5.800,00" },
-          ].map((card, i) => (
+          ].map((card) => (
             //   <motion.div
             //     key={i}
             //     initial={{ opacity: 0, y: 10 }}

@@ -17,7 +17,6 @@ import {
   TableRow,
   TableCell,
 } from "@/components/ui/table";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { CalendarIcon, SlidersHorizontal } from "lucide-react";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
@@ -172,8 +171,8 @@ const Overview = () => {
               <div className="space-y-2">
                 <Label className="pb-2">Local</Label>
                 <div className="flex gap-2 flex-wrap pb-2">
-                  <FilterChip label="Acoty" onToggle={(val) => {}} />
-                  <FilterChip label="Avive" onToggle={(val) => {}} />
+                  <FilterChip label="Acoty" onToggle={() => {}} />
+                  <FilterChip label="Avive" onToggle={() => {}} />
                 </div>
               </div>
 
@@ -181,9 +180,9 @@ const Overview = () => {
               <div className="pt-4 space-y-2">
                 <Label className="pb-2">Dias da Semana</Label>
                 <div className="flex gap-2 flex-wrap pb-2">
-                  <FilterChip label="Sexta" onToggle={(val) => {}} />
-                  <FilterChip label="Sabado" onToggle={(val) => {}} />
-                  <FilterChip label="Domingo" onToggle={(val) => {}} />
+                  <FilterChip label="Sexta" onToggle={() => {}} />
+                  <FilterChip label="Sabado" onToggle={() => {}} />
+                  <FilterChip label="Domingo" onToggle={() => {}} />
                 </div>
               </div>
 
@@ -477,9 +476,6 @@ const Overview = () => {
       </Dialog>
     </div>
   );
-};
-const Budges = () => {
-  return <div>Budges</div>;
 };
 
 export default function Financeiro() {

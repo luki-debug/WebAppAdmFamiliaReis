@@ -113,7 +113,7 @@ export default function RelatoriosOverview() {
                   outerRadius={100}
                   dataKey="value"
                 >
-                  {distribuicaoCategorias.map((entry, index) => (
+                  {distribuicaoCategorias.map((_, index) => (
                     <Cell key={`cell-${index}`} fill={coresCategorias[index % coresCategorias.length]} />
                   ))}
                 </Pie>

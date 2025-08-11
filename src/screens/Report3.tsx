@@ -64,7 +64,7 @@ export default function OverviewRelatorios() {
                 dataKey="value"
                 label={({ name, value }) => `${name} (${value}%)`}
               >
-                {eventosPorTipo.map((entry, index) => (
+                {eventosPorTipo.map((_, index) => (
                   <Cell key={index} fill={COLORS[index % COLORS.length]} />
                 ))}
               </Pie>

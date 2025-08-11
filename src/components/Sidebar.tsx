@@ -1,8 +1,6 @@
-import React from "react";
 import {
   Home,
   Calendar,
-  CalendarDays,
   DollarSign,
   MessageSquare,
   Settings,

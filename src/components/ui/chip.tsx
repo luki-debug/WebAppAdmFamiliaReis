@@ -1,4 +1,3 @@
-import * as React from "react";
 import { X } from "lucide-react";
 
 interface ChipProps {

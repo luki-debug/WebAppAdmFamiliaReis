@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { TrendingUp, Clock, Calendar, Eye, EyeClosed } from "lucide-react";
 import { MetricCard } from "./MetricCard";
 import { EventsTable } from "./EventsTable";

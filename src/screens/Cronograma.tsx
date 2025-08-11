@@ -163,7 +163,7 @@ const Cronogramas = () => {
       ],
     },
   ]);
-  const [tarefas, setTarefas] = useState<Tarefa[]>([
+  const [tarefas, ] = useState<Tarefa[]>([
     { codigo: "T001", nome: "Escolher o espaço do evento", descricao: "Escolher entre Acoty ou Avive" },
     { codigo: "T002", nome: "Escolher cardápio", descricao: "Churrasco, Massas ou Peixes" },
     { codigo: "T003", nome: "Cronograma do evento", descricao: "Cronograma durante o evento" },
@@ -242,7 +242,7 @@ const removeTarefa= (chip: Tarefa ) => {
                       <SelectValue placeholder="Tarefa" />
                     </SelectTrigger>
                     <SelectContent>
-                      {tarefas.map((x, i) => (
+                      {tarefas.map((x) => (
                         <SelectItem value={x.codigo}>{x.codigo} - {x.descricao}</SelectItem>
                       ))}
                     </SelectContent>

@@ -15,13 +15,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
 import { useState } from "react";
-import { Plus } from "lucide-react";
 import {
   Dialog,
   DialogClose,
@@ -71,27 +69,63 @@ const mockPerfis = [
   },
 ];
 
+interface Perfil {
+  nome: string;
+  permissoes: Permissoes;
+}
+
+interface Permissoes {
+  Dashboard: string;
+  Eventos: string;
+  Financeiro: string;
+  Mensagens: string;
+  Serviços: string;
+  Notificações: string;
+  Configurações: string;
+}
+
 export default function EspacoConfiguracao() {
-  const [perfis, setPerfis] = useState(mockPerfis);
-  const [novoPerfil, setNovoPerfil] = useState({
+  const [perfis, setPerfis] = useState<Perfil[]>(mockPerfis);
+  const [novoPerfil, setNovoPerfil] = useState<Perfil>({
     nome: "",
-    permissoes: {} as Record<string, string>,
+    permissoes: {
+      Dashboard: '',
+      Eventos: '',
+      Financeiro: '',
+      Mensagens: '',
+      Serviços: '',
+      Notificações: '',
+      Configurações: '',
+    },
   });
 
   const handleChangePermissao = (pagina: string, permissao: string) => {
-    setNovoPerfil((prev) => ({
-      ...prev,
-      permissoes: {
-        ...prev.permissoes,
-        [pagina]: permissao,
-      },
-    }));
+    if (pagina && permissao) {
+      setNovoPerfil((prev) => ({
+        ...prev,
+        permissoes: {
+          ...prev.permissoes,
+          [pagina]: permissao,
+        },
+      }));
+    }
+
   };
 
   const adicionarPerfil = () => {
-    if (novoPerfil.nome) {
+    if (novoPerfil?.nome) {
       setPerfis([...perfis, novoPerfil]);
-      setNovoPerfil({ nome: "", permissoes: {} });
+      setNovoPerfil({
+        nome: "", permissoes: {
+          Dashboard: '',
+          Eventos: '',
+          Financeiro: '',
+          Mensagens: '',
+          Serviços: '',
+          Notificações: '',
+          Configurações: '',
+        }
+      });
     }
   };
 
@@ -127,7 +161,7 @@ export default function EspacoConfiguracao() {
                           <Label>Nome do Perfil</Label>
                           <Input
                             placeholder="Ex: Recepcionista"
-                            value={novoPerfil.nome}
+                            value={novoPerfil?.nome || ''}
                             onChange={(e) =>
                               setNovoPerfil({
                                 ...novoPerfil,
@@ -187,7 +221,7 @@ export default function EspacoConfiguracao() {
                     <TableCell>{perfil.nome}</TableCell>
                     <TableCell>Ativado</TableCell>
                     <TableCell className="text-center">
-                      <Button variant="outline" onClick={() => {}}>
+                      <Button variant="outline" onClick={() => { }}>
                         Detalhes
                       </Button>
                     </TableCell>
